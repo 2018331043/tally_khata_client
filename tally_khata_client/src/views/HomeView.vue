@@ -1,9 +1,12 @@
+/* eslint-disable prettier/prettier */
 <script setup>
-import TheWelcome from "@/components/TheWelcome.vue";
+import TheWelcome from "@/components/TheWelcome.vue" 
 </script>
 
+
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+<main>
+  <TheWelcome> </TheWelcome>
+</main>
+  
 </template>
