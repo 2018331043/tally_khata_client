@@ -1,20 +1,16 @@
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true,
-  },
-});
+<script setup lang="ts">
+defineProps<{
+  msg: string;
+}>();
 </script>
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
-    <h3>
-      A web application that can help any business organizations by allowing them to record sell, purchase and expense transactions.
-
+    <h1 class="green" style="font-weight: bold; font-size:35px;" >{{ msg }}</h1>
+    <h3 style="font-size:18px" >
+      A web application that can help any business organization by allowing them to record sell, purchase and expense transactions.
       <!-- <a target="_blank" href="https://vitejs.dev/">Vite</a> +
-      <a target="_blank" href="https://vuejs.org/">Vue 3</a>. -->
+      <a target="_blank" href="https://vuejs.org/">Vue 3</a>. What's next? -->
     </h3>
   </div>
 </template>
@@ -22,14 +18,12 @@ defineProps({
 <style scoped>
 h1 {
   font-weight: 500;
-  font-size: 2rem;
+  font-size: 2.6rem;
   top: -10px;
-  font-weight: bold;
-  color: rgb(0,109,240);
 }
 
 h3 {
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .greetings h1,

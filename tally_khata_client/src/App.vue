@@ -13,32 +13,35 @@ import HelloWorld from "@/components/HelloWorld.vue";
     />
 
     <div class="wrapper">
-      <HelloWorld msg="Thank You for choosing TallyKhata" />
+      <HelloWorld msg="Thank You For Choosing TallyKhata"/>
+      
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">Sign In</RouterLink>
+        <RouterLink to="/signup">Sign Up</RouterLink>
       </nav>
+      <div class="homedecoration">
+
+      </div>
     </div>
   </header>
-
   <RouterView />
+
+  
 </template>
 
 <style>
-@import "@/assets/base.css"; */
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
+@import "@/assets/base.css"; 
+.homedecoration{
+  width:20px;
+  height:10px;
+  background: rgba(0, 0, 0, 0.13);
 }
 
 header {
   line-height: 1.5;
   max-height: 100vh;
+  margin-left: 60px;
 }
 
 .logo {
