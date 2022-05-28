@@ -34,6 +34,7 @@
 </template>
 <script>
 import authService from "../../service/auth.service";
+import toast from "../../service/toast.service";
 export default {
   name: "RegisterView",
   data() {
@@ -44,9 +45,6 @@ export default {
       password_hash:null
     };
   },
-  props:[
-    'id'
-  ],
   async created() {
     this.getBlogDetails();
   },
@@ -62,21 +60,12 @@ export default {
         password_hash:this.password_hash
       }
       authService.signUp((data) => {
-        console.log(data);
-        vm.blog=data
+        toast.success('Account Created');
+        console.log('Hello world')
       }, (err) => {
-        console.log(err);
+        toast.error(err);
       },data)
     },
-    commentOnPost(){
-      blogService.commentOnABlog((data) => {
-        console.log(data);
-        this.getBlogDetails();
-        vm.blog=data
-      }, (err) => {
-        console.log(err);
-      },{blog_post:this.id,comment_text:this.comment})
-    }
   },
   mounted() {
 
