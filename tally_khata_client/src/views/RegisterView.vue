@@ -50,7 +50,7 @@
 .signupshade{
     margin-top: 10px;
     margin-bottom: 15px;
-    width:100px;
+    width: 100px;
     height:5px;
     background: black;
 }
