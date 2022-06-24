@@ -1,5 +1,11 @@
-<script>
-    
+<script setup>
+    import { RouterLink} from "vue-router";
+    import { ref } from 'vue'
+    import homeview from "../HomeView.vue"
+
+    var flag = false;
+    const buttonClicked = ()=>{ window.location="/homepage" }
+
 </script>
 
 <template>
@@ -23,7 +29,8 @@
             </div>
        </div>
        <div class="signinfooter">
-            <button type="button" class="button-9" role="button">Sign In</button>
+            <button type="button" class="button-9" role="button" @click="buttonClicked">Sign In</button>
+            
        </div>
    </div>
    </div>

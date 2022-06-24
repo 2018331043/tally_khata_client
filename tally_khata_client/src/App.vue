@@ -21,12 +21,10 @@ import HelloWorld from "@/components/HelloWorld.vue";
         <RouterLink to="/signup">Sign Up</RouterLink>
       </nav>
       <div class="homedecoration">
-
       </div>
     </div>
   </header>
   <RouterView />
-
   
 </template>
 
