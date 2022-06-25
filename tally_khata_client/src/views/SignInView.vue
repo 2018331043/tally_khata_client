@@ -1,10 +1,9 @@
 <script setup>
     import { RouterLink} from "vue-router";
     import { ref } from 'vue'
-    import homeview from "../HomeView.vue"
 
     var flag = false;
-    const buttonClicked = ()=>{ window.location="/homepage" }
+    const buttonClicked = ()=>{  }
 
 </script>
 
