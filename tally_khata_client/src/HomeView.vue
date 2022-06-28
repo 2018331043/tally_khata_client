@@ -48,7 +48,7 @@ import "bootstrap";
       </div>
     </div>
     <div class="homeViewNavFourth">
-      <div class="homeViewNavFourthUser">AHMED IFTEKHER RAIS</div>
+      <div class="homeViewNavFourthUser">{{userInfo?userInfo.user_name:'Loading..'}}</div>
       <div class="homeViewDropdownContainer">
         <img
           class="homeViewOptions"
@@ -61,7 +61,43 @@ import "bootstrap";
     </div>
   </div>
 </template>
+<script>
 
+
+import toast from "../service/toast.service";
+import localStorageService from "../service/localStorage.service";
+import shopService from "../service/shop.service";
+
+export default {
+  name: "HomeView",
+  data() {
+    return {
+      shopSearchKeyword: null,
+      userInfo:null,
+    }
+  },
+  async created() {
+    var vm = this;
+    this.getShopsOfUser();
+    this.userInfo = localStorageService.getUserInfo();
+    toast.success('Logged In Successfully')
+  },
+  mounted() {
+
+  },
+  methods: {
+    getShopsOfUser() {
+      var vm=this;
+      shopService.getAllShopsOfOwner((data)=>{
+
+      },(err)=>{
+        toast.error(err)
+      },{searchKyeWord:vm.searchKyeWord})
+    },
+
+  }
+};
+</script>
 <style>
 .homeViewOptionsDropdown a:hover {
   font-size: 13px;

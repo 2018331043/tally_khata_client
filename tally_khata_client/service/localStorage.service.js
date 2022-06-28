@@ -12,9 +12,6 @@ const localStorageService = {
     setUserInfo(userInfo) {
         localStorage.setItem(USER_INFO, JSON.stringify(userInfo));
     },
-    setIsAdmin(isAdmin){
-        localStorage.setItem(isAdmin, JSON.stringify(isAdmin));
-    },
     getUserInfo() {
         return JSON.parse(localStorage.getItem(USER_INFO));
     },

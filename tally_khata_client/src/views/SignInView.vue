@@ -20,19 +20,58 @@ import router from "../router";
        <div class="SignInBody">
            <div class="inputBox">
                 <label for="inp" class="inp">Email</label>
-                <input type="text" id="inp" placeholder="example@gmail.com">
+                <input v-model="email" type="text" id="inp" placeholder="example@gmail.com">
            </div>
             <div class="inputBox">
                 <label for="inp" class="inp">Password</label>
-                <input type="password" id="inp" placeholder="password">
+                <input v-model="password" type="password" id="inp" placeholder="password">
             </div>
        </div>
        <div class="signinfooter">
-            <button type="button" class="button-9" role="button" @click="buttonClicked">Sign In</button>
+            <button type="button" class="button-9" role="button" @click="signingUser">Sign In</button>
        </div>
    </div>
    </div>
 </template>
+
+<script>
+
+
+import authService from "../../service/auth.service";
+import toast from "../../service/toast.service";
+import localStorageService from "../../service/localStorage.service";
+
+export default {
+  name: "SignInView",
+  data() {
+    return {
+      email: null,
+      password: null,
+    }
+  },
+  async created() {
+    var vm = this;
+  },
+  mounted() {
+    if(localStorageService.getToken()!=null || localStorageService.getToken().length!==0){
+      window.location='/homepage';
+    }
+  },
+  methods: {
+    signingUser() {
+      var vm=this;
+      authService.login({email:vm.email,password:vm.password}).then((response)=>{
+        localStorageService.setToken(response.data.accessToken);
+        localStorageService.setUserInfo(response.data.user)
+        window.location='/homepage'
+      }).catch((err)=>{
+        toast.error('You shall not pass')
+      })
+    },
+
+  }
+};
+</script>
 
 <style>
 .signInWrapper{
@@ -89,7 +128,7 @@ import router from "../router";
   box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
 }
     .signInBody{
-       
+
     }
     .inputBox{
         width:300px;
@@ -122,7 +161,7 @@ import router from "../router";
         background: rgb(255, 255, 255);
         border-radius: 10px;
         /* box-shadow: rgba(0,109,240, 0.1) 0px 4px 12px; */
-        box-shadow: rgba(0,0,0, 0.2) 0px 54px 55px, rgba(0, 0, 0, 0.12) 
+        box-shadow: rgba(0,0,0, 0.2) 0px 54px 55px, rgba(0, 0, 0, 0.12)
         0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     }
 

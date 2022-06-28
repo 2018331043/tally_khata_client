@@ -2,7 +2,6 @@ import axios from "axios";
 
 import localStorageService from "./localStorage.service";
 const config = {
-
     headers: { Authorization: `Bearer ${localStorageService.getToken()}`,
         "Access-Control-Allow-Origin": "*",
         "Content-Type":"application/json",
@@ -14,7 +13,7 @@ const config = {
 
 const authService = {
     login: function (data) {
-        return axios.post('http://127.0.0.1:8000/api/token/', data);
+        return axios.post('/signin', data);
     },
     logout: function () {
         return axios.post(URL.auth.signout);
@@ -22,7 +21,7 @@ const authService = {
     signUp(success, error,data) {
         console.log(data);
         axios
-            .post('http://localhost:3000/signup',data)
+            .post('http://localhost:8000/signup',data)
             .then((responseData) => {
                 success(responseData.data);
             })
