@@ -1,14 +1,9 @@
 <script setup>
-import { RouterView,RouterLink } from "vue-router";
-import WelcomeView from "./views/WelcomeView.vue";
+import { RouterView, RouterLink } from "vue-router";
 </script>
 
 <template>
-  <RouterLink to="/"></RouterLink>
-  <RouterView/>
+  <RouterView />
 </template>
 
-<style>
-
-</style>
-
+<style></style>

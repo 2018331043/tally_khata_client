@@ -1,15 +1,15 @@
 <script setup>
-    import { RouterLink} from "vue-router";
+    import { RouterLink } from "vue-router";
     import { ref } from 'vue'
+import router from "../router";
 
-    var flag = false;
-    const buttonClicked = ()=>{  }
+    const flag1 = ref(false);
+    const buttonClicked = ()=>{ router.push("/homepage"); }
 
 </script>
 
 <template>
-
-    <div class="signInWrapper">
+    <div v-if="!flag1" class="signInWrapper">
    <div class="signInwrap">
        <div class="SignIntitle">
             Sign In
@@ -29,7 +29,6 @@
        </div>
        <div class="signinfooter">
             <button type="button" class="button-9" role="button" @click="buttonClicked">Sign In</button>
-            
        </div>
    </div>
    </div>

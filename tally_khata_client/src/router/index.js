@@ -20,8 +20,8 @@ const router = createRouter({
       component: () => import("../views/RegisterView.vue")
     },
     {
-      path : "/homepage",
-      name: "homepage",
+      path: "/homepage",
+      name: "HomePage",
       component: HomePage
     },
     {

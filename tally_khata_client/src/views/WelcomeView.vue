@@ -91,11 +91,6 @@ a,
 }
 
 @media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
   .welcomeViewContainer{
       display: flex;
   }
