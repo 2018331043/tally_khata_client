@@ -2,67 +2,114 @@
 import { ref } from "vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
+// import ShopCard from '@/components/ShopCard.vue';
+
+const shopInfo = ref({
+  shopName:'GrameenPhone',
+  shopOwner:'Abdul Malek'
+});
+import ShopCard from './components/ShopCard.vue';
 </script>
 
 <template>
-  <div class="homeViewNav">
-    <div class="homeViewNavFirst">
-      <h4>TallyKhata</h4>
-    </div>
-    <div class="homeViewNavSecond">
-      <div
-        :style="{
-          background: 'rgba(255,255,255,0.7)',
-          width: '70%',
-          display: 'flex',
-        }"
-      >
-        <div class="HomeViewSearchImg">
-          <img alt="searchImg" src="@/icons/search.png" />
-        </div>
-        <input class="homeViewActive" type="text" placeholder="search" />
+  <div>
+    <div class="homeViewNav">
+      <div class="homeViewNavFirst">
+        <h4>TallyKhata</h4>
       </div>
-    </div>
-    <div class="homeViewNavThird">
-      <div class="homeViewNavThirdNearbyShops">
-        <img
-          :style="{ marginTop: '1px' }"
-          alt="nearby shops"
-          src="@/icons/shop.png"
-          height="12px"
-          width="12px"
-        />
-        <button class="homeViewNavThirdLink1">Nearby Shops</button>
-      </div>
-      <div class="homeViewNextOptions">
-        <img
-          src="@/icons/downdoublearrow.png"
-          alt="basic options"
-          width="15px"
-        />
-        <div class="homeViewOptionsDropdown">
-          <a href="#">My Shops</a>
-          <a href="#">Suppliers</a>
-          <a href="#">Sign Out</a>
+      <div class="homeViewNavSecond">
+        <div
+          :style="{
+            background: 'rgba(255,255,255,0.7)',
+            width: '70%',
+            display: 'flex',
+          }"
+        >
+          <div class="HomeViewSearchImg">
+            <img alt="searchImg" src="@/icons/search.png" />
+          </div>
+          <input class="homeViewActive" type="text" placeholder="search" />
         </div>
       </div>
-    </div>
-    <div class="homeViewNavFourth">
-      <div class="homeViewNavFourthUser">AHMED IFTEKHER RAIS</div>
-      <div class="homeViewDropdownContainer">
-        <img
-          class="homeViewOptions"
-          alt="options"
-          src="@/icons/man.png"
-          height="35px"
-          width="35px"
-        />
+      <div class="homeViewNavThird">
+        <div class="homeViewNavThirdNearbyShops">
+          <img
+            :style="{ marginTop: '1px' }"
+            alt="nearby shops"
+            src="@/icons/shop.png"
+            height="12px"
+            width="12px"
+          />
+          <button class="homeViewNavThirdLink1">Nearby Shops</button>
+        </div>
+        <div class="homeViewNextOptions">
+          <img
+            src="@/icons/downdoublearrow.png"
+            alt="basic options"
+            width="15px"
+          />
+          <div class="homeViewOptionsDropdown">
+            <a href="#">My Shops</a>
+            <a href="#">Suppliers</a>
+            <a href="#">Sign Out</a>
+          </div>
+        </div>
       </div>
+      <div class="homeViewNavFourth">
+        <div class="homeViewNavFourthUser">AHMED IFTEKHER RAIS</div>
+        <div class="homeViewDropdownContainer">
+          <img
+            class="homeViewOptions"
+            alt="options"
+            src="@/icons/man.png"
+            height="35px"
+            width="35px"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="homeViewBody">
+      <div class="homeViewBodyNavMargin"></div>
+        <div class="homeViewBodyMain">
+          <ShopCard :props="shopInfo"/>
+          <ShopCard props="shopInfo"/>
+          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
+          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
+          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
+          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
+          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
+          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
+          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
+          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
+          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
+          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
+        </div>
     </div>
   </div>
 </template>
 
 <style>
+.homeViewBodyMain {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+  justify-content: center;
+}
+
+.homeViewBody {
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  /* background: black; */
+  /* background: rgba(0, 109, 240, 0.05); */
+  background: rgba(0, 0, 0, 0.148);
+}
+
+.homeViewBodyNavMargin {
+  width: 100%;
+  height: 65px;
+}
 .homeViewOptionsDropdown a:hover {
   font-size: 13px;
   display: block;
@@ -70,7 +117,7 @@ import "bootstrap";
   background: rgb(0, 0, 0);
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color:rgb(0, 0, 0);
+  border-bottom-color: rgb(0, 0, 0);
   text-align: left;
   margin-left: 10px;
   width: 90px;
@@ -80,12 +127,12 @@ import "bootstrap";
   margin-left: 5px;
 }
 
-.homeViewDropdownContainer img:hover{
+.homeViewDropdownContainer img:hover {
   height: 38px;
   width: 38px;
 }
 
-.homeViewDropdownContainer img{
+.homeViewDropdownContainer img {
   margin-right: 40px;
   border-radius: 50%;
   border: white;
@@ -124,7 +171,7 @@ import "bootstrap";
   background: white;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color:black;
+  border-bottom-color: black;
   text-align: left;
   margin-left: 10px;
   width: 90px;
@@ -240,6 +287,8 @@ import "bootstrap";
 }
 
 .homeViewNav {
+  position: fixed;
+  z-index: 1;
   display: flex;
   width: 100%;
   height: 65px;
