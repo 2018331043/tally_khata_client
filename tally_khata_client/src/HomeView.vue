@@ -61,7 +61,7 @@ const createAShopClicked = ()=>{
           <button class="homeViewNavThirdLink1">Nearby Shops</button>
         </div>
         <div class="homeViewNextOptions">
-          <img
+          <img :style="{width:'15px',height:'15px',cursor:'pointer'}"
             src="@/icons/downdoublearrow.png"
             alt="basic options"
             width="15px" height="15px"
@@ -77,7 +77,7 @@ const createAShopClicked = ()=>{
       <div class="homeViewNavFourth">
         <div class="homeViewNavFourthUser"> {{ userInfo ? userInfo.user_name : "Loading.." }}</div>
         <div class="homeViewDropdownContainer">
-          <img
+          <img :style="{width:'35px',height:'35px',cursor:'pointer'}"
             class="homeViewOptions"
             alt="options"
             src="@/icons/man.png"
