@@ -41,7 +41,7 @@ import ShopCard from "./components/ShopCard.vue";
           <div class="HomeViewSearchImg">
             <img alt="searchImg" src="@/icons/search.png" />
           </div>
-          <input class="homeViewActive" type="text" placeholder="search" />
+          <input class="homeViewActive" type="text" placeholder="search" v-model="searchKyeWord" v-on:keyup.enter="getShopsOfUser"/>
         </div>
       </div>
       <div class="homeViewNavThird">
@@ -99,7 +99,7 @@ export default {
   name: "HomeView",
   data() {
     return {
-      shopSearchKeyword: null,
+      searchKyeWord: null,
       userInfo: null,
     };
   },
