@@ -3,12 +3,25 @@ import { ref } from "vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 // import ShopCard from '@/components/ShopCard.vue';
+var asd = ref("wow");
+
+var curShops = ref([
+  { shopName: "GrameenPhone", shopOwner: "Abdur Rahman" },
+  { shopName: "Airtel", shopOwner: "Abdur Rahim" },
+  { shopName: "Robi", shopOwner: "Abdur Gafur" },
+  { shopName: "BanglaLink", shopOwner: "Abdullah Ahmed" },
+  { shopName: "Teletalk", shopOwner: "hmed Rakib" },
+]);
+const shopDetails = {
+  shopName: "GrameenPhone",
+  shopOwner: "Abdul Malek",
+};
 
 const shopInfo = ref({
-  shopName:'GrameenPhone',
-  shopOwner:'Abdul Malek'
+  shopName: "GrameenPhone",
+  shopOwner: "Abdul Malek",
 });
-import ShopCard from './components/ShopCard.vue';
+import ShopCard from "./components/ShopCard.vue";
 </script>
 
 <template>
@@ -56,7 +69,7 @@ import ShopCard from './components/ShopCard.vue';
         </div>
       </div>
       <div class="homeViewNavFourth">
-        <div class="homeViewNavFourthUser">AHMED IFTEKHER RAIS</div>
+        <div class="homeViewNavFourthUser"> {{ userInfo ? userInfo.user_name : "Loading.." }}</div>
         <div class="homeViewDropdownContainer">
           <img
             class="homeViewOptions"
@@ -71,38 +84,13 @@ import ShopCard from './components/ShopCard.vue';
 
     <div class="homeViewBody">
       <div class="homeViewBodyNavMargin"></div>
-        <div class="homeViewBodyMain">
-          <ShopCard :props="shopInfo"/>
-          <ShopCard props="shopInfo"/>
-          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
-          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
-          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
-          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
-          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
-          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
-          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
-          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
-          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
-          <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
-        </div>
-    <div class="homeViewNavFourth">
-      <div class="homeViewNavFourthUser">{{userInfo?userInfo.user_name:'Loading..'}}</div>
-      <div class="homeViewDropdownContainer">
-        <img
-          class="homeViewOptions"
-          alt="options"
-          src="@/icons/man.png"
-          height="35px"
-          width="35px"
-        />
+      <div class="homeViewBodyMain">
+        <ShopCard v-for="items in curShops" :shopName="items.shopName" :shopOwner="items.shop"/>
       </div>
     </div>
   </div>
-  </div>
 </template>
 <script>
-
-
 import toast from "../service/toast.service";
 import localStorageService from "../service/localStorage.service";
 import shopService from "../service/shop.service";
@@ -112,29 +100,28 @@ export default {
   data() {
     return {
       shopSearchKeyword: null,
-      userInfo:null,
-    }
+      userInfo: null,
+    };
   },
   async created() {
     var vm = this;
     this.getShopsOfUser();
     this.userInfo = localStorageService.getUserInfo();
-    toast.success('Logged In Successfully')
+    toast.success("Logged In Successfully");
   },
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
     getShopsOfUser() {
-      var vm=this;
-      shopService.getAllShopsOfOwner((data)=>{
-
-      },(err)=>{
-        toast.error(err)
-      },{searchKyeWord:vm.searchKyeWord})
+      var vm = this;
+      shopService.getAllShopsOfOwner(
+        (data) => {},
+        (err) => {
+          toast.error(err);
+        },
+        { searchKyeWord: vm.searchKyeWord }
+      );
     },
-
-  }
+  },
 };
 </script>
 <style>
@@ -152,6 +139,7 @@ export default {
   /* background: black; */
   /* background: rgba(0, 109, 240, 0.05); */
   background: rgba(0, 0, 0, 0.148);
+  overflow-x: hidden;
 }
 
 .homeViewBodyNavMargin {

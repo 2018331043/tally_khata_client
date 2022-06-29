@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps({
   shopName: String,
-  ownerName: String,
+  shopOwner: String,
 });
 console.log(props);
 console.log("wow");
@@ -10,8 +10,8 @@ console.log("wow");
 <template props>
   <div class="card shopCard" style="width: 20%">
     <div class="card-body">
-      <h5 class="card-title">Alpha Tech Limited</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Owner : Mr. Abdur Bashir</h6>
+      <h5 class="card-title">{{props.shopName}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Owner : {{props.shopOwner}}</h6>
       <div class="shopCardLine"></div>
       <p :style="{ fontSize: '12px' }" class="card-text shopCardDescription">
         Some quick example text to build on the card title and make up the bulk
