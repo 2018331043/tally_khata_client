@@ -1,7 +1,7 @@
 <script setup>
     import { RouterLink } from "vue-router";
     import { ref } from 'vue'
-import router from "../router";
+    import router from "../router";
 
     const flag1 = ref(false);
     const buttonClicked = ()=>{ router.push("/homepage"); }
@@ -53,7 +53,7 @@ export default {
     var vm = this;
   },
   mounted() {
-    if(localStorageService.getToken()!=null || localStorageService.getToken().length!==0){
+    if(localStorageService.getToken()!=null && localStorageService.getToken().length!==0){
       window.location='/homepage';
     }
   },

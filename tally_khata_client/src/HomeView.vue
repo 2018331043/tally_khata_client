@@ -1,9 +1,13 @@
 <script setup>
 import { ref } from "vue";
+import { RouterLink } from "vue-router";
+import router from "./router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
-// import ShopCard from '@/components/ShopCard.vue';
+import ShopModal from './components/AddShopModal.vue';
+import ShopCard from "./components/ShopCard.vue";
 var asd = ref("wow");
+const createAShopFlag = ref(false);
 
 var curShops = ref([
   { shopName: "GrameenPhone", shopOwner: "Abdur Rahman" },
@@ -12,20 +16,21 @@ var curShops = ref([
   { shopName: "BanglaLink", shopOwner: "Abdullah Ahmed" },
   { shopName: "Teletalk", shopOwner: "hmed Rakib" },
 ]);
-const shopDetails = {
-  shopName: "GrameenPhone",
-  shopOwner: "Abdul Malek",
+const signOutStart = ()=>{
+  localStorage.clear();
+  window.location.replace("/");
 };
 
-const shopInfo = ref({
-  shopName: "GrameenPhone",
-  shopOwner: "Abdul Malek",
-});
-import ShopCard from "./components/ShopCard.vue";
+const createAShopClicked = ()=>{
+  // createAShopFlag.value = true;
+  console.log("ahm ahm");
+};
+
 </script>
 
 <template>
   <div>
+    <ShopModal v-if="createAShopFlag"/>
     <div class="homeViewNav">
       <div class="homeViewNavFirst">
         <h4>TallyKhata</h4>
@@ -59,12 +64,13 @@ import ShopCard from "./components/ShopCard.vue";
           <img
             src="@/icons/downdoublearrow.png"
             alt="basic options"
-            width="15px"
+            width="15px" height="15px"
           />
           <div class="homeViewOptionsDropdown">
             <a href="#">My Shops</a>
+            <a @click="createAShopClicked">Create a Shop</a>
             <a href="#">Suppliers</a>
-            <a href="#">Sign Out</a>
+            <a @click="signOutStart">Sign Out</a>
           </div>
         </div>
       </div>
