@@ -61,23 +61,24 @@ const createAShopClicked = ()=>{
           <button class="homeViewNavThirdLink1">Nearby Shops</button>
         </div>
         <div class="homeViewNextOptions">
-          <img :style="{width:'15px',height:'15px',cursor:'pointer'}"
+          <img
+            class="extra2"
             src="@/icons/downdoublearrow.png"
             alt="basic options"
             width="15px" height="15px"
           />
           <div class="homeViewOptionsDropdown">
             <a href="#">My Shops</a>
-            <a @click="createAShopClicked">Create a Shop</a>
+            <a class="extra1" @click="createAShopClicked">Create a Shop</a>
             <a href="#">Suppliers</a>
-            <a @click="signOutStart">Sign Out</a>
+            <a class="extra1" @click="signOutStart">Sign Out</a>
           </div>
         </div>
       </div>
       <div class="homeViewNavFourth">
         <div class="homeViewNavFourthUser"> {{ userInfo ? userInfo.user_name : "Loading.." }}</div>
         <div class="homeViewDropdownContainer">
-          <img :style="{width:'35px',height:'35px',cursor:'pointer'}"
+          <img
             class="homeViewOptions"
             alt="options"
             src="@/icons/man.png"
@@ -131,6 +132,41 @@ export default {
 };
 </script>
 <style>
+.extra2:hover{
+  height: 18px;
+  width: 18px;
+  cursor: pointer;
+}
+
+.extra2{
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+}
+.homeViewOptions{
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+
+.extra1:hover{
+  font-size: 13px;
+  display: block;
+  color: rgb(255, 255, 255);
+  background: rgb(0, 0, 0);
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: rgb(0, 0, 0);
+  text-align: left;
+  margin-left: 10px;
+  width: 120px;
+  /* padding: 11px; */
+  border-radius: 5px;
+  text-align: center;
+  margin-left: 6px;
+  cursor: pointer;
+}
 .homeViewBodyMain {
   display: flex;
   flex-wrap: wrap;
@@ -161,12 +197,12 @@ export default {
   border-bottom-width: 2px;
   border-bottom-color: rgb(0, 0, 0);
   text-align: left;
-  margin-left: 10px;
-  width: 90px;
+  /* margin-left: 10px; */
+  width: 120px;
   /* padding: 11px; */
   border-radius: 5px;
   text-align: center;
-  margin-left: 5px;
+  margin-left: 6px;
 }
 
 .homeViewDropdownContainer img:hover {
@@ -216,7 +252,7 @@ export default {
   border-bottom-color: black;
   text-align: left;
   margin-left: 10px;
-  width: 90px;
+  width: 120px;
   padding: 6px;
   border-radius: 5px;
   text-align: center;
