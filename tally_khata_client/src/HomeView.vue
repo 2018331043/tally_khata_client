@@ -85,7 +85,7 @@ import ShopCard from "./components/ShopCard.vue";
     <div class="homeViewBody">
       <div class="homeViewBodyNavMargin"></div>
       <div class="homeViewBodyMain">
-        <ShopCard v-for="items in curShops" :shopName="items.shopName" :shopOwner="items.shop"/>
+        <ShopCard v-for="items in curShops" :shopName="items.shopName" :shopOwner="items.shopOwner"/>
       </div>
     </div>
   </div>
