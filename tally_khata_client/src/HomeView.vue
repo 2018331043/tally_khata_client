@@ -85,10 +85,58 @@ import ShopCard from './components/ShopCard.vue';
           <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
           <ShopCard props="{name : 'GrameenPhone', owner : 'Abdul Malek'}"/>
         </div>
+    <div class="homeViewNavFourth">
+      <div class="homeViewNavFourthUser">{{userInfo?userInfo.user_name:'Loading..'}}</div>
+      <div class="homeViewDropdownContainer">
+        <img
+          class="homeViewOptions"
+          alt="options"
+          src="@/icons/man.png"
+          height="35px"
+          width="35px"
+        />
+      </div>
     </div>
   </div>
+  </div>
 </template>
+<script>
 
+
+import toast from "../service/toast.service";
+import localStorageService from "../service/localStorage.service";
+import shopService from "../service/shop.service";
+
+export default {
+  name: "HomeView",
+  data() {
+    return {
+      shopSearchKeyword: null,
+      userInfo:null,
+    }
+  },
+  async created() {
+    var vm = this;
+    this.getShopsOfUser();
+    this.userInfo = localStorageService.getUserInfo();
+    toast.success('Logged In Successfully')
+  },
+  mounted() {
+
+  },
+  methods: {
+    getShopsOfUser() {
+      var vm=this;
+      shopService.getAllShopsOfOwner((data)=>{
+
+      },(err)=>{
+        toast.error(err)
+      },{searchKyeWord:vm.searchKyeWord})
+    },
+
+  }
+};
+</script>
 <style>
 .homeViewBodyMain {
   display: flex;
