@@ -156,7 +156,7 @@ const pageTitleContainer = ref("Nearby Shops");
       <div class="homeViewBodyNavMargin"></div>
 
       <div class="homeViewBodyMain">
-        <ShopCard v-for="items in shops" :shopName="items.shop_name" :shopOwner="items.shop_owner"/>
+        <ShopCard v-for="items in shops" :shopName="items.shop_name" :shopOwner="items.owner_name"/>
       </div>
     </div>
   </div>
