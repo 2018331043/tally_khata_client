@@ -43,6 +43,7 @@ console.log(props.shopFlag);
         </div>
         <div class="shopCardButton">
           <img
+          :style="{marginLeft:'20px'}"
           class="imgFind"
             alt="location"
             src="@/icons/shops.png"
@@ -106,11 +107,17 @@ export default {
 .AddShopModalContainer{
   margin: 10px;
   display: flex;
-  justify-content: space-between !important;
+  /* flex-direction: column; */
 }
 
 .shopCardButton img {
   margin-right: 8px;
+}
+
+.closeButton:hover{
+  background: rgb(255, 0, 0);
+  color: white;
+  /* padding: 5px; */
 }
 
 .closeButton {
@@ -172,7 +179,8 @@ textarea {
 
 .modalCenter {
   height: 500px;
-  width: 500px;
+  width: 400px;
+  border-radius: 10px;
   background: white;
   display: flex;
   flex-direction: column;
