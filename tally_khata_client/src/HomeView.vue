@@ -5,52 +5,85 @@ import { RouterLink } from "vue-router";
 import router from "./router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
-import ShopModal from './components/AddShopModal.vue';
+import ShopModal from "./components/AddShopModal.vue";
 import ShopCard from "./components/ShopCard.vue";
 var asd = ref("wow");
 const createAShopFlag = ref(false);
 
- var dataRef;
-//  var selectedShops = ref(curShops.value);
+// var dataRef;
+// var selectedShops = ref([curShops]);
 // console.log(selectedShops);
 
 var curShops = ref([
-  {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
-  {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
-  {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
-  {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
-  {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
+  {
+    lattitude: 25.66,
+    longitude: 24.33,
+    owner_name: "Abdur Rahman",
+    owner_number: "01234566754",
+    shop_name: "GrameenPhone",
+  },
+  {
+    lattitude: 25.66,
+    longitude: 24.33,
+    owner_name: "Abdur Rahman",
+    owner_number: "01234566754",
+    shop_name: "GrameenPhone",
+  },
+  {
+    lattitude: 25.66,
+    longitude: 24.33,
+    owner_name: "Abdur Rahman",
+    owner_number: "01234566754",
+    shop_name: "GrameenPhone",
+  },
+  {
+    lattitude: 25.66,
+    longitude: 24.33,
+    owner_name: "Abdur Rahman",
+    owner_number: "01234566754",
+    shop_name: "GrameenPhone",
+  },
+  {
+    lattitude: 25.66,
+    longitude: 24.33,
+    owner_name: "Abdur Rahman",
+    owner_number: "01234566754",
+    shop_name: "GrameenPhone",
+  },
 ]);
 
-// console.log(curShops.value);
-const signOutStart = ()=>{
+const signOutStart = () => {
   localStorage.clear();
   window.location.replace("/");
 };
 
-const createAShopClicked = ()=>{
+const createAShopClicked = () => {
   createAShopFlag.value = true;
   console.log("ahm ahm");
 };
 
-const modalResponse= () =>{
-  createAShopFlag.value=false;
-  toast.success('Add shop for owner successfully');
+const modalResponse = () => {
+  createAShopFlag.value = false;
+  toast.success("Add shop for owner successfully");
   this.getShopsOfUser();
   // console.log("response come!");
-}
+};
 const myShopShowFlag = ref(false);
-const MyShopsShow = () =>{
-  myShopShowFlag.value=true;
-  pageTitleContainer.value='My Shops';
-}
+const MyShopsShow = () => {
+  myShopShowFlag.value = true;
+  pageTitleContainer.value = "My Shops";
+};
 
-const pageTitleContainer = ref('Nearby Shops');
+const pageTitleContainer = ref("Nearby Shops");
 </script>
 
 <template>
   <div>
-    <ShopModal v-if="createAShopFlag" :shopFlag="createAShopFlag" @response="modalResponse"/>
+    <ShopModal
+      v-if="createAShopFlag"
+      :shopFlag="createAShopFlag"
+      @response="modalResponse"
+    />
     <div class="homeViewNav">
       <div class="homeViewNavFirst">
         <h4>TallyKhata</h4>
@@ -66,7 +99,13 @@ const pageTitleContainer = ref('Nearby Shops');
           <div class="HomeViewSearchImg">
             <img alt="searchImg" src="@/icons/search.png" />
           </div>
-          <input class="homeViewActive" type="text" placeholder="search" v-model="searchKyeWord" v-on:keyup.enter="getShopsOfUser"/>
+          <input
+            class="homeViewActive"
+            type="text"
+            placeholder="search"
+            v-model="searchKyeWord"
+            v-on:keyup.enter="getShopsOfUser"
+          />
         </div>
       </div>
       <div class="homeViewNavThird">
@@ -78,14 +117,15 @@ const pageTitleContainer = ref('Nearby Shops');
             height="12px"
             width="12px"
           />
-          <button class="homeViewNavThirdLink1" @click="toggleNerby">Nearby Shops</button>
+          <button class="homeViewNavThirdLink1">Nearby Shops</button>
         </div>
         <div class="homeViewNextOptions">
           <img
             class="extra2"
             src="@/icons/downdoublearrow.png"
             alt="basic options"
-            width="15px" height="15px"
+            width="15px"
+            height="15px"
           />
           <div class="homeViewOptionsDropdown">
             <a class="extra1" @click="MyShopsShow" href="#">My Shops</a>
@@ -96,7 +136,9 @@ const pageTitleContainer = ref('Nearby Shops');
         </div>
       </div>
       <div class="homeViewNavFourth">
-        <div class="homeViewNavFourthUser"> {{ userInfo ? userInfo.user_name : "Loading.." }}</div>
+        <div class="homeViewNavFourthUser">
+          {{ userInfo ? userInfo.user_name : "Loading.." }}
+        </div>
         <div class="homeViewDropdownContainer">
           <img
             class="homeViewOptions"
@@ -182,19 +224,18 @@ export default {
   cursor: pointer;
 }
 
-.extra2{
+.extra2 {
   height: 15px;
   width: 15px;
   cursor: pointer;
 }
-.homeViewOptions{
+.homeViewOptions {
   width: 35px;
   height: 35px;
   cursor: pointer;
 }
 
-
-.extra1:hover{
+.extra1:hover {
   font-size: 13px;
   display: block;
   color: rgb(255, 255, 255);
