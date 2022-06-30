@@ -143,15 +143,11 @@ export default {
       var vm = this;
       shopService.getAllShopsOfOwner(
         (data) => {
-<<<<<<< HEAD
           console.log('data->')
           // dataRef=data;
           console.log(data);
           // dataRef={...data};
           // console.log(dataRef);
-=======
-
->>>>>>> 07556bacd8abb78f8fd28636eab5e8c1a0e1fbb3
         },
         (err) => {
           toast.error(err);
