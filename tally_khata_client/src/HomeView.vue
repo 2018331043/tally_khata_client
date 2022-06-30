@@ -22,15 +22,20 @@ const signOutStart = ()=>{
 };
 
 const createAShopClicked = ()=>{
-  // createAShopFlag.value = true;
+  createAShopFlag.value = true;
   console.log("ahm ahm");
 };
+
+const modalResponse= () =>{
+  createAShopFlag.value=false;
+  // console.log("response come!");
+}
 
 </script>
 
 <template>
   <div>
-    <ShopModal v-if="createAShopFlag"/>
+    <ShopModal v-if="createAShopFlag" :shopFlag="createAShopFlag" @response="modalResponse"/>
     <div class="homeViewNav">
       <div class="homeViewNavFirst">
         <h4>TallyKhata</h4>
