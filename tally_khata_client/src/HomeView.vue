@@ -117,7 +117,8 @@ const pageTitleContainer = ref("Nearby Shops");
             height="12px"
             width="12px"
           />
-          <button class="homeViewNavThirdLink1" @click="toggleNerby">Nearby Shops</button>
+          <button class="homeViewNavThirdLink1" v-if="showNearby" @click="toggleNerby">Nearby Shops</button>
+          <button class="homeViewNavThirdLink1" v-else @click="toggleNerby">My Shops</button>
         </div>
         <div class="homeViewNextOptions">
           <img
