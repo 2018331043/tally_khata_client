@@ -117,7 +117,7 @@ const pageTitleContainer = ref("Nearby Shops");
             height="12px"
             width="12px"
           />
-          <button class="homeViewNavThirdLink1">Nearby Shops</button>
+          <button class="homeViewNavThirdLink1" @click="toggleNerby">Nearby Shops</button>
         </div>
         <div class="homeViewNextOptions">
           <img
@@ -155,11 +155,7 @@ const pageTitleContainer = ref("Nearby Shops");
       <div class="homeViewBodyNavMargin"></div>
 
       <div class="homeViewBodyMain">
-        <ShopCard
-          v-for="items in curShops"
-          :shopName="items.shop_name"
-          :shopOwner="items.owner_name"
-        />
+        <ShopCard v-for="items in shops" :shopName="items.shop_name" :shopOwner="items.shop_owner"/>
       </div>
     </div>
   </div>
@@ -175,6 +171,8 @@ export default {
     return {
       searchKyeWord: null,
       userInfo: null,
+      showNearby:false,
+      shops:null,
     };
   },
   async created() {
@@ -185,12 +183,27 @@ export default {
   },
   mounted() {},
   methods: {
+    toggleNerby(){
+      this.showNearby=!this.showNearby;
+      this.getShopsOfUser();
+    },
     getShopsOfUser() {
       var vm = this;
       shopService.getAllShopsOfOwner(
         (data) => {
-          console.log("data->");
+          console.log('data->')
           // dataRef=data;
+          if(vm.showNearby){
+            vm.shops=[
+              {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
+              {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
+              {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
+              {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
+              {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
+            ]
+          }else{
+            vm.shops=data;
+          }
           console.log(data);
           // dataRef={...data};
           // console.log(dataRef);
@@ -201,11 +214,11 @@ export default {
         { searchKyeWord: vm.searchKyeWord }
       );
     },
-  },
+    },
 };
 </script>
 <style>
-.extra2:hover {
+.extra2:hover{
   height: 18px;
   width: 18px;
   cursor: pointer;
