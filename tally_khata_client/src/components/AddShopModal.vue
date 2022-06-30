@@ -50,7 +50,7 @@ console.log(props.shopFlag);
             width="15px"
             height="15px"
           />
-          <a href="#" @click="shopAddButtonClicked" class="card-link"
+          <a href="#" @click="addShopForOwner" class="card-link"
             >Add a Shop</a
           >
         </div>
