@@ -133,6 +133,17 @@ export default {
         { searchKyeWord: vm.searchKyeWord }
       );
     },
+    addShopForOwner() {
+      var vm = this;
+      var data
+      shopService.addShopForOwner(
+          (data) => {},
+          (err) => {
+            toast.error(err);
+          },
+          data
+      );
+    },
   },
 };
 </script>

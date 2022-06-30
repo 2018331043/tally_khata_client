@@ -1,6 +1,5 @@
 <script setup>
 import "bootstrap";
-
 const props = defineProps({
   shopFlag: Boolean,
 });
@@ -21,15 +20,15 @@ console.log(props.shopFlag);
       <h2>Add Your Shop</h2>
       <div class="inputBox1">
         <label for="inp" class="inp">Shop Name</label>
-        <input v-model="email" type="text" id="inp" placeholder="" />
+        <input v-model="shopName" type="text" id="inp" placeholder="" />
       </div>
       <div class="inputBox1">
         <label for="inp" class="inp">Phone Number</label>
-        <input v-model="email" type="number" id="inp" placeholder="" />
+        <input v-model="shopNumber" type="text" id="inp" placeholder="" />
       </div>
       <div class="inputBox1">
         <label for="inp" class="inp">Short Description</label>
-        <textarea :style="{ resize: 'none' }"> </textarea>
+        <textarea v-model="shopDescription" :style="{ resize: 'none' }"> </textarea>
       </div>
       <div class="AddShopModalContainer">
         <div class="shopCardButton">
@@ -50,7 +49,7 @@ console.log(props.shopFlag);
             width="15px"
             height="15px"
           />
-          <a href="#" @click="shopAddButtonClicked" class="card-link"
+          <a href="#" @click="addShopForOwner" class="card-link"
             >Add a Shop</a
           >
         </div>
@@ -59,7 +58,56 @@ console.log(props.shopFlag);
     <!-- <button @click="wowClicked"></button> -->
   </div>
 </template>
+<script>
+import toast from "../../service/toast.service";
+import shopService from "../../service/shop.service";
 
+export default {
+  name: "AddShopModa",
+  data() {
+    return {
+      shopName: null,
+      shopNumber: null,
+      shopDescription: null,
+    };
+  },
+  async created() {
+    var vm = this;
+    this.getShopsOfUser();
+    this.userInfo = localStorageService.getUserInfo();
+    toast.success("Logged In Successfully");
+  },
+  mounted() {},
+  methods: {
+    getShopsOfUser() {
+      var vm = this;
+      shopService.getAllShopsOfOwner(
+          (data) => {
+            toast.success('Add shop for owner successfully')
+          },
+          (err) => {
+            toast.error(err);
+          },
+          { searchKyeWord: vm.searchKyeWord }
+      );
+    },
+    addShopForOwner() {
+      var data={
+        shop_number:this.shopNumber,
+        description:this.shopDescription,
+        name:this.shopName
+      }
+      shopService.addShopForOwner(
+          (data) => {},
+          (err) => {
+            toast.error(err);
+          },
+          data
+      );
+    },
+  },
+};
+</script>
 <style>
 .imgFind{
   height: 20px;
