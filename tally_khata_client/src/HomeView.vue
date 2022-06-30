@@ -126,7 +126,9 @@ export default {
     getShopsOfUser() {
       var vm = this;
       shopService.getAllShopsOfOwner(
-        (data) => {},
+        (data) => {
+
+        },
         (err) => {
           toast.error(err);
         },
