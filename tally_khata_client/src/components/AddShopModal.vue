@@ -7,7 +7,7 @@ const props = defineProps({
 const emit = defineEmits(["response"]);
 
 const shopAddButtonClicked = () => {
-  console.log("Im add shop modal");
+  // console.log("Im add shop modal");
   emit("response", false);
 };
 console.log(props.shopFlag);
@@ -49,7 +49,7 @@ console.log(props.shopFlag);
             width="15px"
             height="15px"
           />
-          <a href="#" @click="addShopForOwner" class="card-link"
+          <a href="#" @click="shopAddButtonClicked" class="card-link"
             >Add a Shop</a
           >
         </div>
@@ -71,26 +71,8 @@ export default {
       shopDescription: null,
     };
   },
-  async created() {
-    var vm = this;
-    this.getShopsOfUser();
-    this.userInfo = localStorageService.getUserInfo();
-    toast.success("Logged In Successfully");
-  },
   mounted() {},
   methods: {
-    getShopsOfUser() {
-      var vm = this;
-      shopService.getAllShopsOfOwner(
-          (data) => {
-            toast.success('Add shop for owner successfully')
-          },
-          (err) => {
-            toast.error(err);
-          },
-          { searchKyeWord: vm.searchKyeWord }
-      );
-    },
     addShopForOwner() {
       var data={
         shop_number:this.shopNumber,
@@ -98,7 +80,9 @@ export default {
         name:this.shopName
       }
       shopService.addShopForOwner(
-          (data) => {},
+          (data) => {
+            shopAddButtonClicked();
+          },
           (err) => {
             toast.error(err);
           },

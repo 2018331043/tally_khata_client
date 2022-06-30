@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+// import toast from "../../service/toast.service";
 import { RouterLink } from "vue-router";
 import router from "./router";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,13 +10,19 @@ import ShopCard from "./components/ShopCard.vue";
 var asd = ref("wow");
 const createAShopFlag = ref(false);
 
+ var dataRef;
+//  var selectedShops = ref(curShops.value);
+// console.log(selectedShops);
+
 var curShops = ref([
-  { shopName: "GrameenPhone", shopOwner: "Abdur Rahman" },
-  { shopName: "Airtel", shopOwner: "Abdur Rahim" },
-  { shopName: "Robi", shopOwner: "Abdur Gafur" },
-  { shopName: "BanglaLink", shopOwner: "Abdullah Ahmed" },
-  { shopName: "Teletalk", shopOwner: "hmed Rakib" },
+  {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
+  {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
+  {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
+  {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
+  {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
 ]);
+
+// console.log(curShops.value);
 const signOutStart = ()=>{
   localStorage.clear();
   window.location.replace("/");
@@ -28,9 +35,17 @@ const createAShopClicked = ()=>{
 
 const modalResponse= () =>{
   createAShopFlag.value=false;
+  toast.success('Add shop for owner successfully');
+  this.getShopsOfUser();
   // console.log("response come!");
 }
+const myShopShowFlag = ref(false); 
+const MyShopsShow = () =>{
+  myShopShowFlag.value=true;
+  pageTitleContainer.value='My Shops';
+}
 
+const pageTitleContainer = ref('Nearby Shops');
 </script>
 
 <template>
@@ -73,7 +88,7 @@ const modalResponse= () =>{
             width="15px" height="15px"
           />
           <div class="homeViewOptionsDropdown">
-            <a href="#">My Shops</a>
+            <a class="extra1" @click="MyShopsShow" href="#">My Shops</a>
             <a class="extra1" @click="createAShopClicked">Create a Shop</a>
             <a href="#">Suppliers</a>
             <a class="extra1" @click="signOutStart">Sign Out</a>
@@ -96,6 +111,7 @@ const modalResponse= () =>{
 
     <div class="homeViewBody">
       <div class="homeViewBodyNavMargin"></div>
+      
       <div class="homeViewBodyMain">
         <ShopCard v-for="items in curShops" :shopName="items.shopName" :shopOwner="items.shopOwner"/>
       </div>
@@ -126,25 +142,20 @@ export default {
     getShopsOfUser() {
       var vm = this;
       shopService.getAllShopsOfOwner(
-        (data) => {},
+        (data) => {
+          console.log('data->')
+          // dataRef=data;
+          console.log(data);
+          // dataRef={...data};
+          // console.log(dataRef);
+        },
         (err) => {
           toast.error(err);
         },
         { searchKyeWord: vm.searchKyeWord }
       );
     },
-    addShopForOwner() {
-      var vm = this;
-      var data
-      shopService.addShopForOwner(
-          (data) => {},
-          (err) => {
-            toast.error(err);
-          },
-          data
-      );
     },
-  },
 };
 </script>
 <style>
