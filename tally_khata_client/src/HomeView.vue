@@ -1,4 +1,5 @@
 <script setup>
+import ShopView from "./views/ShopView.vue"
 import { ref } from "vue";
 // import toast from "../../service/toast.service";
 import { RouterLink } from "vue-router";
@@ -7,7 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import ShopModal from "./components/AddShopModal.vue";
 import ShopCard from "./components/ShopCard.vue";
-var asd = ref("wow");
+import { onMounted } from "vue";
+// var asd = ref("wow");
 const createAShopFlag = ref(false);
 
 // var dataRef;
@@ -60,6 +62,7 @@ const signOutStart = () => {
 const createAShopClicked = () => {
   createAShopFlag.value = true;
   console.log("ahm ahm");
+  this.getShopsOfUser();
 };
 
 const modalResponse = () => {
@@ -75,6 +78,24 @@ const MyShopsShow = () => {
 };
 
 const pageTitleContainer = ref("Nearby Shops");
+
+const shopOpenFlag = ref(false);
+
+const shopOpenView = (e) => {
+  shopOpenFlag.value=true;
+  router.push({name: "shop" ,params: {title:"This is the title"}});
+}
+
+onMounted(() => {
+  // shopOpenFlag.value=false;
+});
+// onMounted(()=>{
+//    window.onpopstate = function(event) {
+     
+//    };
+//   shopOpenFlag.value = false;
+// })
+
 </script>
 
 <template>
@@ -156,7 +177,8 @@ const pageTitleContainer = ref("Nearby Shops");
       <div class="homeViewBodyNavMargin"></div>
 
       <div class="homeViewBodyMain">
-        <ShopCard v-for="items in shops" :shopName="items.shop_name" :shopOwner="items.owner_name"/>
+        <!-- <ShopView v-if="shopOpenFlag"/> -->
+        <ShopCard @click="shopOpenView" v-for="items in shops" :shopName="items.shop_name" :shopOwner="items.owner_name"/>
       </div>
     </div>
   </div>
