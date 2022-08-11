@@ -16,7 +16,7 @@ console.log(props.shopFlag);
 <template>
   <div v-if="props.debtFlag" class="modalBody">
     <div class="modalCenter">
-      <button @click="shopAddButtonClicked" class="closeButton">X</button>
+      <button @click="addDebt" class="closeButton">X</button>
       <h2>ADD A DEBTOR</h2>
       <div class="debtModalSpan"></div>
       <!-- <div class="debtModalSpan1"></div> -->
