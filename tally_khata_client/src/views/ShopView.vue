@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import DebtView from "../components/DebtView.vue";
+import DebtModal from '../components/DebtModal.vue'
+
 
 const shopName = ref("");
 const shopOwner = ref("");
@@ -11,10 +13,23 @@ let shopE = "introvertstr@gmail.com";
 shopName.value = shop.toUpperCase();
 shopOwner.value = shopO.toUpperCase();
 ShopEmail.value = shopE;
+
+const addLoanClickedFlag = ref(false);
+
+const AddLoanClicked = () => {
+    // console.log('add loan clicked')
+    addLoanClickedFlag.value=true;
+
+}
+
+const debtModalClose = () =>{
+    addLoanClickedFlag.value=false;
+}
 </script>
 
 <template>
   <div class="shopViewContainer">
+      <DebtModal :debtFlag= "addLoanClickedFlag" @responseDebt="debtModalClose"/>
     <div class="shopViewHead">
       <div class="shopViewHeadLeft">
         <h1>{{ shopName }}</h1>
@@ -27,46 +42,41 @@ ShopEmail.value = shopE;
       <div class="shopViewSidebar">
         <div class="shopViewSidebarItems">
           <p>Active Loans</p>
-          <p>Item 2</p>
+          <p @click="AddLoanClicked">Add Loan</p>
           <p>Item 3</p>
         </div>
       </div>
       <div class="shopViewDebtList">
-            <div class="shopViewDebtListBody">
-                <DebtView/>
-                <DebtView/>
-                <DebtView/>
-            </div>
+        <div class="shopViewDebtListBody">
+          <DebtView />
+          <DebtView />
+          <DebtView />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-
 <script>
- export default{
-     props:[
-         'title',
-     ],
-     async created(){
-         console.log(this.title);
-         
-     }
- }
+export default {
+  props: ["title"],
+  async created() {
+    console.log(this.title);
+  },
+};
 </script>
 
 <style>
-
-.shopViewDebtListBody{
-    width: 50%;
-    height: 100px;
+.shopViewDebtListBody {
+  width: 50%;
+  height: 100px;
 }
 .shopViewDebtList {
-    overflow: auto;
-    display: flex;
-    align-items: center;
-    /* justify-content: center; */
-    flex-direction: column;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: column;
   width: 84%;
   height: 100%;
   /* background: red; */
@@ -93,13 +103,16 @@ ShopEmail.value = shopE;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 20px;
+  margin-top: 30px;
+  /* margin-right: 20px; */
 }
 
 .shopViewSidebar {
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2)
-      0px -3px 0px inset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   margin: 10px;
   height: calc(100% - 20px);
   width: 16%;
