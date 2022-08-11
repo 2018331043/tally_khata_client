@@ -8,11 +8,22 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import ShopModal from "./components/AddShopModal.vue";
 import ShopCard from "./components/ShopCard.vue";
-import { onMounted } from "vue";
+import { onMounted , onUpdated } from "vue";
 import DemoModal from './components/demoModal.vue';
 
 const createAShopFlag = ref(false);
-
+const lat = ref(25.66)
+const lng = ref(25.66)
+getLocation()
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(setPosition);
+  }
+}
+function setPosition(position) {
+  lat.value = position.coords.latitude
+  lng.value = position.coords.longitude
+}
 
 var curShops = ref([
   {
@@ -95,16 +106,24 @@ const locationModalClose = () => {
   locationAddFlag.value=false;
 }
 
+const updateLocation = (val) => {
+  lat.value = val.latLng.lat();
+  lng.value = val.latLng.lng();
+}
+
+
 </script>
 <template>
   <div>
     <ShopModal
       v-if="createAShopFlag"
       :shopFlag="createAShopFlag"
+      :lat = "lat"
+      :lng = "lng"
       @response="modalResponse"
       @locationResponse="locationAddButtonClicked"
     />
-    <DemoModal v-if = "locationAddFlag"  :demoFlag= "locationAddFlag" @responseLocation="locationModalClose"/>
+    <DemoModal v-if = "locationAddFlag"  :demoFlag= "locationAddFlag" @responseLocation="locationModalClose" @locationInfo="updateLocation"/>
     <!-- <ShopLocationPicker
     ></ShopLocationPicker> -->
     <div class="homeViewNav">
@@ -224,6 +243,11 @@ export default {
   },
   mounted() {},
   methods: {
+    modalResponse(){
+      this.createAShopFlag = false;
+      toast.success("Add shop for owner successfully");
+      this.getShopsOfUser();
+    },
     toggleNerby() {
       this.showNearby = !this.showNearby;
       this.getShopsOfUser();
