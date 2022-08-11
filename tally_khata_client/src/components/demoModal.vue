@@ -6,7 +6,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["responseLocation"]);
-
+console.log('opps')
 const demoButtonClicked = () => {
   // console.log("Im add shop modal");
   emit("responseLocation", false);
