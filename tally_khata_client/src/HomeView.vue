@@ -91,20 +91,29 @@ onMounted(() => {
 });
 // onMounted(()=>{
 //    window.onpopstate = function(event) {
-     
+
 //    };
 //   shopOpenFlag.value = false;
 // })
 
 </script>
-
 <template>
   <div>
+<!--    <GoogleMap-->
+<!--        api-key="AIzaSyDsy2m2yJs1ufBp6nBRgPOafTgPrmWvgvg"-->
+<!--        style="width: 100%; height: 500px"-->
+<!--        :center="center"-->
+<!--        :zoom="15"-->
+<!--    >-->
+<!--      <Marker :options="{ position: { lat: 40.689247, lng: -74.044502 } }" />-->
+<!--    </GoogleMap>-->
     <ShopModal
       v-if="createAShopFlag"
       :shopFlag="createAShopFlag"
       @response="modalResponse"
     />
+    <ShopLocationPicker
+    ></ShopLocationPicker>
     <div class="homeViewNav">
       <div class="homeViewNavFirst">
         <h4>TallyKhata</h4>
@@ -187,9 +196,12 @@ onMounted(() => {
 import toast from "../service/toast.service";
 import localStorageService from "../service/localStorage.service";
 import shopService from "../service/shop.service";
-
+import ShopLocationPicker from "./components/ShopLocationPicker.vue";
 export default {
   name: "HomeView",
+  components:{
+    ShopLocationPicker
+  },
   data() {
     return {
       searchKyeWord: null,
