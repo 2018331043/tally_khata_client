@@ -1,13 +1,22 @@
 <script setup>
+import { ref } from "vue";
+
 import "bootstrap";
 const props = defineProps({
   debtFlag: Boolean,
 });
 
+const debtorData = ref({
+  name: "",
+  number: "",
+  amount: "",
+  remarks: "",
+});
+
 const emit = defineEmits(["responseDebt"]);
 
 const addDebt = () => {
-  // console.log("Im add shop modal");
+  console.log(debtorData.value);
   emit("responseDebt", false);
 };
 console.log(props.shopFlag);
@@ -15,22 +24,26 @@ console.log(props.shopFlag);
 '
 <template>
   <div v-if="props.debtFlag" class="modalBody">
-    <div class="modalCenter">
+    <div class="debtModalCenter">
       <button @click="addDebt" class="closeButton">X</button>
       <h2>ADD A DEBTOR</h2>
       <div class="debtModalSpan"></div>
       <!-- <div class="debtModalSpan1"></div> -->
-      <div class="inputBox1">
+      <div class="inputBox1Debt">
         <label for="inp" class="inp">Name</label>
-        <input v-model="shopName" type="text" id="inp" placeholder="" />
+        <input v-model="debtorData.name" type="text" id="inp" placeholder="" />
       </div>
-      <div class="inputBox1">
+      <div class="inputBox1Debt">
         <label for="inp" class="inp">Phone Number</label>
-        <input v-model="shopNumber" type="text" id="inp" placeholder="" />
+        <input v-model="debtorData.number" type="number" id="inp" placeholder="" />
       </div>
-      <div class="inputBox1">
+      <div class="inputBox1Debt">
+        <label for="inp" class="inp">Amount</label>
+        <input v-model="debtorData.amount" type="number" id="inp" placeholder="" />
+      </div>
+      <div class="inputBox1Debt">
         <label for="inp" class="inp">Remarks</label>
-        <textarea v-model="shopDescription" :style="{ resize: 'none' }">
+        <textarea v-model="debtorData.remarks" :style="{ resize: 'none' }">
         </textarea>
       </div>
       <div class="AddShopModalContainer">
@@ -41,32 +54,34 @@ console.log(props.shopFlag);
   </div>
 </template>
 <style>
-.DebtModalButton:hover{
-    width: 100px;
-    height: 38px;
-    border: none;
-    color: white;
-    font-weight: 600;
-    font-size: 17px;
-    border-radius: 5px;
-    background: rgba(0, 109, 240, 1);
-    /* background: rgba(0, 0, 0, 0.9); */
-    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, 
-    rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+.DebtModalButton:hover {
+  width: 100px;
+  height: 38px;
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 17px;
+  border-radius: 5px;
+  background: rgba(0, 109, 240, 1);
+  /* background: rgba(0, 0, 0, 0.9); */
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
+    rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
+    rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
-.DebtModalButton{
-    margin-top: 8px;
-    width: 100px;
-    height: 38px;
-    border: none;
-    color: white;
-    font-weight: 600;
-    font-size: 16px;
-    border-radius: 5px;
-    background: rgba(0, 109, 240, .9);
-    /* background: rgba(0, 0, 0, 0.747); */
-    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, 
-    rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+.DebtModalButton {
+  margin-top: 4px;
+  width: 100px;
+  height: 38px;
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 5px;
+  background: rgba(0, 109, 240, 0.9);
+  /* background: rgba(0, 0, 0, 0.747); */
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
+    rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
+    rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
 .debtModalSpan {
   border-radius: 10px;
@@ -130,18 +145,18 @@ textarea {
   font-size: 16px;
   resize: none;
 }
-.inputBox1 {
-  width: 300px;
+.inputBox1Debt {
+  width: 350px;
   display: flex;
   flex-direction: column;
   margin: 10px;
 }
 
-.inputBox1 input {
+.inputBox1Debt input {
   height: 2rem;
 }
 
-.inputBox1 label {
+.inputBox1Debt label {
   font-size: 1em;
   font-weight: bold;
   margin-bottom: 5px;
@@ -159,9 +174,9 @@ textarea {
   align-items: center;
 }
 
-.modalCenter {
-  height: 500px;
-  width: 400px;
+.debtModalCenter {
+  height: 580px;
+  width: 600px;
   border-radius: 10px;
   background: white;
   display: flex;

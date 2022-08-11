@@ -1,11 +1,17 @@
-<script>
+<script setup>
 import { ref } from "vue";
+// import { onMounted } from "vue";
+
+const debtorName = ref({
+    
+})
+// console.log(debtorName.value)
 
 </script>
 
 <template>
   <div class="DebtViewContainer">
-    <h3>ABDUR RAHMAN</h3>
+    <h3>{{ debtorName }}</h3>
     <div class="debtViewSpan"></div>
     <div class="debtViewSpanSecond"></div>
     <p>He bought a laptop, a speaker and some other stuffs.</p>
@@ -26,7 +32,6 @@ import { ref } from "vue";
     </div>
   </div>
 </template>
-
 <style>
 .debtViewSpanSpecial {
   margin-bottom: 5px;

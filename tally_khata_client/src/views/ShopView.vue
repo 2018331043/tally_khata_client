@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import DebtView from "../components/DebtView.vue";
 import DebtModal from '../components/DebtModal.vue'
+import DemoModal from '../components/demoModal.vue'
 
 
 const shopName = ref("");
@@ -25,11 +26,23 @@ const AddLoanClicked = () => {
 const debtModalClose = () =>{
     addLoanClickedFlag.value=false;
 }
+
+//demo modal functionality
+const demoModalFlag = ref(false)
+
+const demoModalClose = () => {
+    demoModalFlag.value=false;
+}
+
+const demoModalClicked = () =>{
+    demoModalFlag.value=true;
+}
 </script>
 
 <template>
   <div class="shopViewContainer">
       <DebtModal :debtFlag= "addLoanClickedFlag" @responseDebt="debtModalClose"/>
+      <DemoModal :demoFlag= "demoModalFlag" @responsedemo="demoModalClose" />
     <div class="shopViewHead">
       <div class="shopViewHeadLeft">
         <h1>{{ shopName }}</h1>
@@ -43,7 +56,7 @@ const debtModalClose = () =>{
         <div class="shopViewSidebarItems">
           <p>Active Loans</p>
           <p @click="AddLoanClicked">Add Loan</p>
-          <p>Item 3</p>
+          <p @click="demoModalClicked">Item 3</p>
         </div>
       </div>
       <div class="shopViewDebtList">

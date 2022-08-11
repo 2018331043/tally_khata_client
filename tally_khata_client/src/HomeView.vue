@@ -1,5 +1,5 @@
 <script setup>
-import ShopView from "./views/ShopView.vue"
+import ShopView from "./views/ShopView.vue";
 import { ref } from "vue";
 // import toast from "../../service/toast.service";
 import { RouterLink } from "vue-router";
@@ -82,20 +82,19 @@ const pageTitleContainer = ref("Nearby Shops");
 const shopOpenFlag = ref(false);
 
 const shopOpenView = (e) => {
-  shopOpenFlag.value=true;
-  router.push({name: "shop" ,params: {title:"This is the title"}});
-}
+  shopOpenFlag.value = true;
+  router.push({ name: "shop", params: { title: "This is the title" } });
+};
 
 onMounted(() => {
   // shopOpenFlag.value=false;
 });
 // onMounted(()=>{
 //    window.onpopstate = function(event) {
-     
+
 //    };
 //   shopOpenFlag.value = false;
 // })
-
 </script>
 
 <template>
@@ -138,8 +137,16 @@ onMounted(() => {
             height="12px"
             width="12px"
           />
-          <button class="homeViewNavThirdLink1" v-if="showNearby" @click="toggleNerby">Nearby Shops</button>
-          <button class="homeViewNavThirdLink1" v-else @click="toggleNerby">My Shops</button>
+          <button
+            class="homeViewNavThirdLink1"
+            v-if="showNearby"
+            @click="toggleNerby"
+          >
+            Nearby Shops
+          </button>
+          <button class="homeViewNavThirdLink1" v-else @click="toggleNerby">
+            My Shops
+          </button>
         </div>
         <div class="homeViewNextOptions">
           <img
@@ -178,7 +185,12 @@ onMounted(() => {
 
       <div class="homeViewBodyMain">
         <!-- <ShopView v-if="shopOpenFlag"/> -->
-        <ShopCard @click="shopOpenView" v-for="items in shops" :shopName="items.shop_name" :shopOwner="items.owner_name"/>
+        <ShopCard
+          @click="shopOpenView"
+          v-for="items in shops"
+          :shopName="items.shop_name"
+          :shopOwner="items.owner_name"
+        />
       </div>
     </div>
   </div>
@@ -194,8 +206,8 @@ export default {
     return {
       searchKyeWord: null,
       userInfo: null,
-      showNearby:false,
-      shops:null,
+      showNearby: false,
+      shops: null,
     };
   },
   async created() {
@@ -206,26 +218,56 @@ export default {
   },
   mounted() {},
   methods: {
-    toggleNerby(){
-      this.showNearby=!this.showNearby;
+    toggleNerby() {
+      this.showNearby = !this.showNearby;
       this.getShopsOfUser();
     },
     getShopsOfUser() {
       var vm = this;
       shopService.getAllShopsOfOwner(
         (data) => {
-          console.log('data->')
+          console.log("data->");
           // dataRef=data;
-          if(vm.showNearby){
-            vm.shops=[
-              {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
-              {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
-              {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
-              {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
-              {lattitude:25.66,longitude: 24.33,owner_name:'Abdur Rahman',owner_number:'01234566754',shop_name:'GrameenPhone'},
-            ]
-          }else{
-            vm.shops=data;
+          if (vm.showNearby) {
+            vm.shops = [
+              {
+                lattitude: 25.66,
+                longitude: 24.33,
+                owner_name: "Abdur Rahman",
+                owner_number: "01234566754",
+                shop_name: "GrameenPhone",
+              },
+              {
+                lattitude: 25.66,
+                longitude: 24.33,
+                owner_name: "Abdur Rahman",
+                owner_number: "01234566754",
+                shop_name: "GrameenPhone",
+              },
+              {
+                lattitude: 25.66,
+                longitude: 24.33,
+                owner_name: "Abdur Rahman",
+                owner_number: "01234566754",
+                shop_name: "GrameenPhone",
+              },
+              {
+                lattitude: 25.66,
+                longitude: 24.33,
+                owner_name: "Abdur Rahman",
+                owner_number: "01234566754",
+                shop_name: "GrameenPhone",
+              },
+              {
+                lattitude: 25.66,
+                longitude: 24.33,
+                owner_name: "Abdur Rahman",
+                owner_number: "01234566754",
+                shop_name: "GrameenPhone",
+              },
+            ];
+          } else {
+            vm.shops = data;
           }
           console.log(data);
           // dataRef={...data};
@@ -237,11 +279,11 @@ export default {
         { searchKyeWord: vm.searchKyeWord }
       );
     },
-    },
+  },
 };
 </script>
 <style>
-.extra2:hover{
+.extra2:hover {
   height: 18px;
   width: 18px;
   cursor: pointer;
