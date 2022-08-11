@@ -3,9 +3,12 @@ import "bootstrap";
 import LocationComp from '../components/ShopLocationPicker.vue'
 const props = defineProps({
   demoFlag: Boolean,
+  saveLocation : Function
 });
-
-const emit = defineEmits(["responseLocation"]);
+const changeLocation = (val)=>{
+  emit('locationInfo',val)
+}
+const emit = defineEmits(["responseLocation",'locationInfo']);
 
 const demoButtonClicked = () => {
   // console.log("Im add shop modal");
@@ -17,9 +20,17 @@ console.log(props.shopFlag);
 <template>
   <div v-if="props.demoFlag" class="modalBody">
     <div class="modalCenterdemo">
-      <button @click="demoButtonClicked" class="closeButton">X</button>
+      <div class="row">
+        <div class="allign-items">
+          <button @click="demoButtonClicked" type="button" class="btn btn-primary mt-3">Save Location</button>
+          <button @click="demoButtonClicked" class="closeButton ml-30">X</button>
+        </div>
+      </div>
       <div class="demoModalLocation">
-        <LocationComp></LocationComp>
+        <LocationComp
+          :saveLocation = props.saveLocation
+          @locationChanged = changeLocation
+        ></LocationComp>
       </div>
       </div>
     </div>
@@ -68,12 +79,19 @@ console.log(props.shopFlag);
 }
 
 .modalCenterdemo {
-  height: 80%;
-  width: 80%;
+  height: 60%;
+  width: 40%;
   border-radius: 10px;
   background: white;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.ml-30{
+  margin-left: 550px;
+}
+.allign-items{
+  display:flex;
+  justify-content: flex-end;
 }
 </style>

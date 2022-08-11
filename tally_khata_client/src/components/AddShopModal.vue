@@ -1,19 +1,26 @@
 <script setup>
 import "bootstrap";
+import { onMounted , onUpdated } from "vue";
 const props = defineProps({
   shopFlag: Boolean,
+  lat: Object,
+  lng: Object,
 });
+
+
 
 const emit = defineEmits(["response", 'locationResponse']);
 
+onUpdated(()=>{
+  console.log(props.lat);
+  console.log(props.lng);
+})
 const locationAdd = () => {
   emit("locationResponse");
 }
 const shopAddButtonClicked = () => {
-  // console.log("Im add shop modal");
   emit("response", false);
 };
-console.log(props.shopFlag);
 
 </script>
 '
@@ -66,9 +73,9 @@ console.log(props.shopFlag);
 <script>
 import toast from "../../service/toast.service";
 import shopService from "../../service/shop.service";
-
+import shopLocationPicker from './ShopLocationPicker.vue'
 export default {
-  name: "AddShopModa",
+  name: "AddShopModal",
   data() {
     return {
       shopName: null,
@@ -76,13 +83,16 @@ export default {
       shopDescription: null,
     };
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
     addShopForOwner() {
       var data={
         shop_number:this.shopNumber,
         description:this.shopDescription,
-        name:this.shopName
+        name:this.shopName,
+        lat:this.lat,
+        lng:this.lng,
       }
       shopService.addShopForOwner(
           (data) => {
