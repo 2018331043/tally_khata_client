@@ -2,23 +2,25 @@
 import { ref } from "vue";
 // import { onMounted } from "vue";
 
-const debtorName = ref({
-    
-})
+const debtorInfo = ref({
+  name: "Abdur Rahman",
+  remarks: "hello world",
+  amount: "5000",
+  phone_number: "01222342342",
+});
 // console.log(debtorName.value)
-
 </script>
 
 <template>
   <div class="DebtViewContainer">
-    <h3>{{ debtorName }}</h3>
+    <h3>{{ debtorInfo.name }}</h3>
     <div class="debtViewSpan"></div>
     <div class="debtViewSpanSecond"></div>
-    <p>He bought a laptop, a speaker and some other stuffs.</p>
+    <p>{{ debtorInfo.remarks }}.</p>
     <div class="debtViewSpanSecond1"></div>
     <div class="debtViewFooter">
       <div>
-        <h6>Amount: 5000</h6>
+        <h6>Amount: {{ debtorInfo.amount }}}</h6>
       </div>
       <div class="debtViewSpanSpecial"></div>
       <div class="debtViewFooterRight">
@@ -27,7 +29,7 @@ const debtorName = ref({
           src="../icons/smartphone.png"
           alt="phone"
         />
-        <h6>01623423423</h6>
+        <h6>{{ debtorInfo.phone_number }}</h6>
       </div>
     </div>
   </div>
