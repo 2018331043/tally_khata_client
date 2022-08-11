@@ -9,13 +9,12 @@ const props = defineProps({
 
 const emit = defineEmits(["responseLocation"]);
 console.log('opps')
-=======
 const changeLocation = (val)=>{
   emit('locationInfo',val)
 }
-const emit = defineEmits(["responseLocation",'locationInfo']);
+// const emit = defineEmits(["responseLocation",'locationInfo']);
 
->>>>>>> 64f5dc8ecce2b6516e21337685f37153d5260870
+
 const demoButtonClicked = () => {
   // console.log("Im add shop modal");
   emit("responseLocation", false);
