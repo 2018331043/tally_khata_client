@@ -1,14 +1,15 @@
 <script setup>
 import "bootstrap";
+import LocationComp from '../components/ShopLocationPicker.vue'
 const props = defineProps({
   demoFlag: Boolean,
 });
 
-const emit = defineEmits(["responsedemo"]);
+const emit = defineEmits(["responseLocation"]);
 
 const demoButtonClicked = () => {
   // console.log("Im add shop modal");
-  emit("responsedemo", false);
+  emit("responseLocation", false);
 };
 console.log(props.shopFlag);
 </script>
@@ -17,13 +18,18 @@ console.log(props.shopFlag);
   <div v-if="props.demoFlag" class="modalBody">
     <div class="modalCenterdemo">
       <button @click="demoButtonClicked" class="closeButton">X</button>
-      
+      <div class="demoModalLocation">
+        <LocationComp></LocationComp>
+      </div>
       </div>
     </div>
 </template>
 
 <style>
-
+.demoModalLocation{
+  margin-top: 20px;
+  width: 100%;
+}
 .closeButton:hover{
   background: rgb(255, 0, 0);
   color: white;
@@ -62,8 +68,8 @@ console.log(props.shopFlag);
 }
 
 .modalCenterdemo {
-  height: 600px;
-  width: 600px;
+  height: 80%;
+  width: 80%;
   border-radius: 10px;
   background: white;
   display: flex;

@@ -9,12 +9,10 @@ import "bootstrap";
 import ShopModal from "./components/AddShopModal.vue";
 import ShopCard from "./components/ShopCard.vue";
 import { onMounted } from "vue";
-// var asd = ref("wow");
+import DemoModal from './components/demoModal.vue';
+
 const createAShopFlag = ref(false);
 
-// var dataRef;
-// var selectedShops = ref([curShops]);
-// console.log(selectedShops);
 
 var curShops = ref([
   {
@@ -86,33 +84,29 @@ const shopOpenView = (e) => {
   router.push({ name: "shop", params: { title: "This is the title" } });
 };
 
-onMounted(() => {
-  // shopOpenFlag.value=false;
-});
-// onMounted(()=>{
-//    window.onpopstate = function(event) {
+//demoModalImplementation
+const locationAddFlag = ref(false);
 
-//    };
-//   shopOpenFlag.value = false;
-// })
+const locationAddButtonClicked = () => {
+  locationAddFlag.value=true;
+}
+
+const locationModalClose = () => {
+  locationAddFlag.value=false;
+}
+
 </script>
 <template>
   <div>
-<!--    <GoogleMap-->
-<!--        api-key="AIzaSyDsy2m2yJs1ufBp6nBRgPOafTgPrmWvgvg"-->
-<!--        style="width: 100%; height: 500px"-->
-<!--        :center="center"-->
-<!--        :zoom="15"-->
-<!--    >-->
-<!--      <Marker :options="{ position: { lat: 40.689247, lng: -74.044502 } }" />-->
-<!--    </GoogleMap>-->
     <ShopModal
       v-if="createAShopFlag"
       :shopFlag="createAShopFlag"
       @response="modalResponse"
+      @locationResponse="locationAddButtonClicked"
     />
-    <ShopLocationPicker
-    ></ShopLocationPicker>
+    <DemoModal v-if = "locationAddFlag"  :demoFlag= "locationAddFlag" @responseLocation="locationModalClose"/>
+    <!-- <ShopLocationPicker
+    ></ShopLocationPicker> -->
     <div class="homeViewNav">
       <div class="homeViewNavFirst">
         <h4>TallyKhata</h4>

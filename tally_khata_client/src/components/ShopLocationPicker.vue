@@ -11,20 +11,7 @@
     <Marker :options="{ position: center , draggable: true }" @drag="updateLocation"/>
   </GoogleMap>
 </template>
-<!--<script>-->
-<!--// import toast from "../service/toast.service";-->
-<!--// import localStorageService from "../service/localStorage.service";-->
-<!--// import shopService from "../service/shop.service";-->
 
-<!--export default {-->
-<!--  name: "ShopLocationPicker",-->
-<!--  data() {-->
-<!--    return {-->
-<!--      center: { lat: 40.689247, lng: -74.044502 },-->
-<!--    };-->
-<!--  },-->
-<!--};-->
-<!--</script>-->
 <script>
 import { defineComponent } from 'vue'
 import { GoogleMap, Marker, CustomControl } from 'vue3-google-map'

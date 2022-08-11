@@ -4,13 +4,17 @@ const props = defineProps({
   shopFlag: Boolean,
 });
 
-const emit = defineEmits(["response"]);
+const emit = defineEmits(["response", 'locationResponse']);
 
+const locationAdd = () => {
+  emit("locationResponse");
+}
 const shopAddButtonClicked = () => {
   // console.log("Im add shop modal");
   emit("response", false);
 };
 console.log(props.shopFlag);
+
 </script>
 '
 <template>
@@ -39,7 +43,7 @@ console.log(props.shopFlag);
             width="20px"
             height="20px"
           />
-          <a href="#" class="card-link">Location</a>
+          <a href="#" class="card-link" @click="locationAdd">Location</a>
         </div>
         <div class="shopCardButton">
           <img
