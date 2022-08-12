@@ -1,9 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import DebtView from "../components/DebtView.vue";
-import DebtModal from '../components/DebtModal.vue'
+import DebtModal from "../components/DebtModal.vue";
 // import DemoModal from '../components/demoModal.vue'
-
 
 const shopName = ref("");
 const shopOwner = ref("");
@@ -18,14 +17,13 @@ ShopEmail.value = shopE;
 const addLoanClickedFlag = ref(false);
 
 const AddLoanClicked = () => {
-    // console.log('add loan clicked')
-    addLoanClickedFlag.value=true;
+  // console.log('add loan clicked')
+  addLoanClickedFlag.value = true;
+};
 
-}
-
-const debtModalClose = () =>{
-    addLoanClickedFlag.value=false;
-}
+const debtModalClose = () => {
+  addLoanClickedFlag.value = false;
+};
 
 //demo modal functionality
 // const demoModalFlag = ref(false)
@@ -41,15 +39,20 @@ const debtModalClose = () =>{
 
 <template>
   <div class="shopViewContainer">
-      <DebtModal :debtFlag= "addLoanClickedFlag" @responseDebt="debtModalClose"/>
-      <!-- <DemoModal :demoFlag= "demoModalFlag" @responsedemo="demoModalClose" /> -->
+    <DebtModal :debtFlag="addLoanClickedFlag" @responseDebt="debtModalClose" />
+    <!-- <DemoModal :demoFlag= "demoModalFlag" @responsedemo="demoModalClose" /> -->
     <div class="shopViewHead">
       <div class="shopViewHeadLeft">
         <h1>{{ shopName }}</h1>
         <h6>Owner: {{ shopOwner }}</h6>
         <h7>{{ ShopEmail }}</h7>
       </div>
-      <div class="shopViewHeadRight"></div>
+      <div class="shopViewHeadRight">
+        <div class="shopViewSearchContainer">
+          <img :style="{height:'20px',width:'20px'}" src="../icons/search.png"/>
+          <input type="text" placeholder="search here"/>
+        </div>
+      </div>
     </div>
     <div class="shopViewBody">
       <div class="shopViewSidebar">
@@ -80,6 +83,39 @@ export default {
 </script>
 
 <style>
+.shopViewSearchContainer input{
+  margin-left: 10px;
+  width: calc(100% - 40px);
+  border: none;
+  background: none;
+  border-radius: 10px;
+  height: 40px;
+  padding-left: 10px;
+}
+.shopViewSearchContainer img{
+  margin-left: 10px;
+}
+
+.shopViewSearchContainer{
+  align-items: center;
+  display: flex;
+  background: rgba(255, 255, 255, 0.815);
+  width: 60%;
+  height: 40px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 
+  0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 
+  0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+}
+.shopViewHeadRight {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  margin-right: 50px;
+}
 .shopViewDebtListBody {
   width: 50%;
   height: 100px;
@@ -170,8 +206,7 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
-.shopViewHeadRight {
-}
+
 .shopViewHead {
   display: flex;
   width: 100%;
