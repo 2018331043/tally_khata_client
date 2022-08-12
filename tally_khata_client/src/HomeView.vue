@@ -206,12 +206,11 @@ const updateLocation = (val) => {
     <div class="homeViewBody">
       <div class="homeViewBodyNavMargin"></div>
 
-      <div class="homeViewBodyMain">
-        <!-- <ShopView v-if="shopOpenFlag"/> -->
+      <div class="homeViewBodyMain">g"
+        <!-- <ShopView v-if="shopOpenFla/> -->
         <ShopCard
           @responseMaximize="shopOpenView(items)"
           v-for="items in shops"
-          @click="shopOpenView(items)"
           :shopName="items.shop_name"
           :shopOwner="items.owner_name"
           :shopDescription="items.description"
