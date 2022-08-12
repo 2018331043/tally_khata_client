@@ -23,6 +23,8 @@ const AddLoanClicked = () => {
 
 const debtModalClose = () => {
   addLoanClickedFlag.value = false;
+  getShopInfo();
+
 };
 
 //demo modal functionality
