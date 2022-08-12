@@ -1,44 +1,47 @@
 <template>
   <GoogleMap
-      api-key="AIzaSyDsy2m2yJs1ufBp6nBRgPOafTgPrmWvgvg"
-      style="width: 100%; height: 100%;"
-      :center="center"
-      :zoom="15"
+    api-key="AIzaSyDsy2m2yJs1ufBp6nBRgPOafTgPrmWvgvg"
+    style="width: 100%; height: 100%"
+    :center="center"
+    :zoom="15"
   >
     <CustomControl position="BOTTOM_CENTER">
       <button class="custom-btn" @click="sayHi">👋</button>
     </CustomControl>
-    <Marker :options="{ position: center , draggable: true }" @drag="updateLocation"/>
+    <Marker
+      :options="{ position: center, draggable: true }"
+      @drag="updateLocation"
+    />
   </GoogleMap>
 </template>
 
 <script setup>
-import { defineComponent, defineProps, defineEmits , ref} from 'vue'
-import { GoogleMap, Marker, CustomControl } from 'vue3-google-map'
+import { defineComponent, defineProps, defineEmits, ref } from "vue";
+import { GoogleMap, Marker, CustomControl } from "vue3-google-map";
 const props = defineProps({
   saveLocation: Function,
 });
-const emit = defineEmits(['locationChanged']);
-const center = ref({ lat: 24.907177, lng: 91.835413 })
-getLocation()
+const emit = defineEmits(["locationChanged"]);
+const center = ref({ lat: 24.907177, lng: 91.835413 });
+getLocation();
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(setPosition);
   }
 }
 function setPosition(position) {
-  center.value.lat = position.coords.latitude
-  center.value.lng = position.coords.longitude
+  center.value.lat = position.coords.latitude;
+  center.value.lng = position.coords.longitude;
 }
 
-const updateLocation = (val)=>{
-  emit("locationChanged",val);
+const updateLocation = (val) => {
+  emit("locationChanged", val);
   // props.saveLocation(val)
-}
+};
 
-const saveLocation = ()=>{
-  console.log('Clicked');
-}
+const saveLocation = () => {
+  console.log("Clicked");
+};
 // export default defineComponent({
 //   components: { GoogleMap, Marker , CustomControl},
 //   setup() {

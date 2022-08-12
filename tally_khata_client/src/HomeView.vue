@@ -212,6 +212,7 @@ const updateLocation = (val) => {
           v-for="items in shops"
           :shopName="items.shop_name"
           :shopOwner="items.owner_name"
+          :shopDescription="items.description"
         />
       </div>
     </div>
