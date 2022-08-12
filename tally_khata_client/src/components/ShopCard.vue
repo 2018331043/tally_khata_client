@@ -2,6 +2,7 @@
 const props = defineProps({
   shopName: String,
   shopOwner: String,
+  shopDescription: String,
 });
 console.log(props);
 console.log("wow");
@@ -14,8 +15,7 @@ console.log("wow");
       <h6 class="card-subtitle mb-2 text-muted">Owner : {{props.shopOwner}}</h6>
       <div class="shopCardLine"></div>
       <p :style="{ fontSize: '12px' }" class="card-text shopCardDescription">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content. of the card's content.
+        {{props.shopDescription}}
       </p>
       <div class="shopCardButtonContainer">
         <div class="shopCardButton">

@@ -213,6 +213,7 @@ const updateLocation = (val) => {
           @click="shopOpenView(items)"
           :shopName="items.shop_name"
           :shopOwner="items.owner_name"
+          :shopDescription="items.description"
         />
       </div>
     </div>

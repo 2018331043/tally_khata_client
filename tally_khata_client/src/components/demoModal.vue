@@ -1,19 +1,17 @@
 <script setup>
 // import "bootstrap";
-import LocationComp from '../components/ShopLocationPicker.vue'
+import LocationComp from "../components/ShopLocationPicker.vue";
 const props = defineProps({
   demoFlag: Boolean,
-  saveLocation : Function
+  saveLocation: Function,
 });
-
 
 const emit = defineEmits(["responseLocation"]);
 // console.log('opps')
-const changeLocation = (val)=>{
-  emit('locationInfo',val)
-}
+const changeLocation = (val) => {
+  emit("locationInfo", val);
+};
 // const emit = defineEmits(["responseLocation",'locationInfo']);
-
 
 const demoButtonClicked = () => {
   // console.log("Im add shop modal");
@@ -26,21 +24,23 @@ console.log(props.shopFlag);
   <div v-if="props.demoFlag" class="modalBody">
     <div class="modalCenterdemo">
       <div class="demoModalButtons">
-          <button @click="demoButtonClicked" class="saveLocationButton">Save Location</button>
-          <button @click="demoButtonClicked" class="closeButtonDemo">X</button>
+        <button @click="demoButtonClicked" class="saveLocationButton">
+          Save Location
+        </button>
+        <button @click="demoButtonClicked" class="closeButtonDemo">X</button>
       </div>
       <div class="demoModalLocation">
         <LocationComp
-          :saveLocation = props.saveLocation
-          @locationChanged = changeLocation
+          :saveLocation="props.saveLocation"
+          @locationChanged="changeLocation"
         ></LocationComp>
       </div>
-      </div>
     </div>
+  </div>
 </template>
 
 <style>
-.saveLocationButton:hover{
+.saveLocationButton:hover {
   height: 40px;
   margin-left: 20px;
   margin-top: 30px;
@@ -51,29 +51,29 @@ console.log(props.shopFlag);
   border-radius: 5px;
 }
 
-.saveLocationButton{
+.saveLocationButton {
   height: 40px;
   margin-left: 20px;
   margin-top: 30px;
   color: white;
   border: none;
   font-weight: 600;
-  background: rgba(0, 109, 240, .9);
+  background: rgba(0, 109, 240, 0.9);
   border-radius: 5px;
 }
-.demoModalButtons{
+.demoModalButtons {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
   height: 10%;
 }
-.demoModalLocation{
+.demoModalLocation {
   margin-top: 20px;
   width: 100%;
   height: 90%;
 }
-.closeButtonDemo:hover{
+.closeButtonDemo:hover {
   background: rgb(255, 0, 0);
   color: white;
   /* padding: 5px; */
