@@ -5,7 +5,7 @@ const props = defineProps({
   demoFlag: Boolean,
   saveLocation : Function
 });
-<<<<<<< HEAD
+
 
 const emit = defineEmits(["responseLocation"]);
 console.log('opps')
