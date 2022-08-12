@@ -39,18 +39,22 @@ const debtModalClose = () => {
 
 <template>
   <div class="shopViewContainer">
-    <DebtModal :debtFlag="addLoanClickedFlag" @responseDebt="debtModalClose" />
+    <DebtModal :debtFlag="addLoanClickedFlag" @responseDebt="debtModalClose" :shopNumber="shopNumber"/>
     <!-- <DemoModal :demoFlag= "demoModalFlag" @responsedemo="demoModalClose" /> -->
     <div class="shopViewHead">
-      <div class="shopViewHeadLeft">
-        <h1>{{ shopName }}</h1>
-        <h6>Owner: {{ shopOwner }}</h6>
-        <h7>{{ ShopEmail }}</h7>
+      <div class="shopViewHeadLeft" v-if="shopInfo">
+        <h1>{{ shopInfo.shop_name }}</h1>
+        <h6>Owner: {{ shopInfo.owner_name }}</h6>
+        <h7>{{ shopInfo.owner_number }}</h7>
       </div>
       <div class="shopViewHeadRight">
         <div class="shopViewSearchContainer">
           <img :style="{height:'20px',width:'20px'}" src="../icons/search.png"/>
-          <input type="text" placeholder="search here"/>
+          <input type="text"
+                 placeholder="search here"
+                 v-model="searchKyeWord"
+                 v-on:keyup.enter="getShopInfo"
+          />
         </div>
       </div>
     </div>
@@ -59,14 +63,38 @@ const debtModalClose = () => {
         <div class="shopViewSidebarItems">
           <p>Active Loans</p>
           <p @click="AddLoanClicked">Add Loan</p>
-          <p @click="demoModalClicked">Item 3</p>
         </div>
       </div>
       <div class="shopViewDebtList">
         <div class="shopViewDebtListBody">
-          <DebtView />
-          <DebtView />
-          <DebtView />
+
+
+          <template v-for="debtorInfo in debtList">
+            <div class="DebtViewContainer">
+              <h3>{{ debtorInfo.customer_name }}</h3>
+              <div class="debtViewSpan"></div>
+              <div class="debtViewSpanSecond"></div>
+              <p>{{ debtorInfo.description }}.</p>
+              <div class="debtViewSpanSecond1"></div>
+              <div class="debtViewFooter">
+                <div>
+                  <h6>Amount: {{ debtorInfo.amount }}</h6>
+                </div>
+                <div class="debtViewSpanSpecial"></div>
+                <div class="debtViewFooterRight">
+                  <img
+                      :style="{ width: '20px', height: '20px', marginRight: '3px' }"
+                      src="../icons/smartphone.png"
+                      alt="phone"
+                  />
+                  <h6>{{ debtorInfo.customer_phone_number }}</h6>
+                </div>
+              </div>
+            </div>
+          </template>
+<!--          <DebtView />-->
+<!--          <DebtView />-->
+<!--          <DebtView />-->
         </div>
       </div>
     </div>
@@ -74,11 +102,36 @@ const debtModalClose = () => {
 </template>
 
 <script>
+import shopService from "../../service/shop.service";
+import toast from "../../service/toast.service";
 export default {
-  props: ["title"],
-  async created() {
-    console.log(this.title);
+  props: ["shopNumber"],
+  data() {
+    return {
+      dataLoaded: true,
+      debtList : [],
+      shopInfo: null,
+      searchKyeWord : null,
+    };
   },
+  async created() {
+    this.getShopInfo();
+    console.log(this.shopNumber);
+  },
+  methods:{
+    getShopInfo() {
+      shopService.getShopInfo((data)=>{
+        toast.success('Loaded the shop info successfully');
+        this.shopInfo = data.shopDetails;
+        this.debtList = data.shopDebtresult;
+      },(err)=>{
+        toast.error('Error Loading the data for the shop info')
+      },{
+        shop_number:this.shopNumber,
+        searchKeyWord: this.searchKyeWord
+      })
+    },
+  }
 };
 </script>
 
@@ -103,8 +156,8 @@ export default {
   width: 60%;
   height: 40px;
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 
-  0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07)
+  0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07)
   0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
 }
 .shopViewHeadRight {
@@ -220,5 +273,73 @@ export default {
   display: flex;
   flex-direction: column;
   background: rgba(0, 0, 0, 0.148);
+}
+.debtViewSpanSpecial {
+  margin-bottom: 5px;
+  width: 20px;
+  height: 4px;
+  border-radius: 10px;
+  background: rgb(7, 7, 44);
+}
+
+.debtViewFooterRight {
+  display: flex;
+}
+.debtViewFooter {
+  width: calc(100% - 30px);
+  display: flex;
+  margin-top: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+  height: 40px;
+  align-items: center;
+  justify-content: space-around;
+}
+.debtViewSpanSecond1 {
+  margin-top: 10px;
+  margin-left: 15px;
+  width: 95%;
+  height: 1px;
+  background: black;
+}
+.DebtViewContainer p {
+  margin-top: 10px;
+  margin-left: 15px;
+  height: 45px;
+  margin-right: 5px;
+}
+.debtViewSpanSecond {
+  margin-top: 10px;
+  margin-left: 15px;
+  width: 55%;
+  height: 4px;
+  background: black;
+}
+.debtViewSpan {
+  margin-top: 5px;
+  margin-left: 15px;
+  width: 25%;
+  height: 4px;
+  background: rgba(253, 98, 68, 1);
+}
+.DebtViewContainer h3 {
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+.DebtViewContainer {
+  align-items: flex-start;
+  margin-left: 10px;
+  margin-top: 10px;
+  min-width: 550px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  margin: 10px;
+  border-radius: 15px;
+  width: 100%;
+  height: 200px;
+  background: rgb(255, 255, 255);
 }
 </style>

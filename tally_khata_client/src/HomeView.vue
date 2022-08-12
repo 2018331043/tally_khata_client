@@ -90,9 +90,10 @@ const pageTitleContainer = ref("Nearby Shops");
 
 const shopOpenFlag = ref(false);
 
-const shopOpenView = (e) => {
+const shopOpenView = (items) => {
+  console.log(items);
   shopOpenFlag.value = true;
-  router.push({ name: "shop", params: { title: "This is the title" } });
+  router.push({ name: "shop", params: { shopNumber: items.shop_number } });
 };
 
 //demoModalImplementation
@@ -208,8 +209,8 @@ const updateLocation = (val) => {
       <div class="homeViewBodyMain">
         <!-- <ShopView v-if="shopOpenFlag"/> -->
         <ShopCard
-          @click="shopOpenView"
           v-for="items in shops"
+          @click="shopOpenView(items)"
           :shopName="items.shop_name"
           :shopOwner="items.owner_name"
         />
