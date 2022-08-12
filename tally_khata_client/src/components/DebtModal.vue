@@ -30,15 +30,18 @@ const addDebt = () => {
     amount:debtorData.value.amount,
     customer_name:debtorData.value.name,
   })
-  emit("responseDebt", false);
+  emit("responseDebt", true);
 };
+const addDebtFalse=()=>{
+  emit("responseDebt", false);
+}
 console.log(props.shopFlag);
 </script>
 '
 <template>
   <div v-if="props.debtFlag" class="modalBody">
     <div class="debtModalCenter">
-      <button @click="addDebt" class="closeButton">X</button>
+      <button @click="addDebtFalse" class="closeButton">X</button>
       <h2>ADD A DEBTOR</h2>
       <div class="debtModalSpan"></div>
       <!-- <div class="debtModalSpan1"></div> -->

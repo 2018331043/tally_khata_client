@@ -1,9 +1,12 @@
+<!-- eslint-disable prettier/prettier -->
 <script setup>
 // import "bootstrap";
 import LocationComp from "../components/ShopLocationPicker.vue";
 const props = defineProps({
   demoFlag: Boolean,
   saveLocation: Function,
+  lattitude:Number,
+  longitude:Number,
 });
 
 const emit = defineEmits(["responseLocation"]);
@@ -21,7 +24,7 @@ console.log(props.shopFlag);
 </script>
 '
 <template>
-  <div v-if="props.demoFlag" class="modalBody">
+  <div v-if="props.demoFlag" class="modalBodydemo">
     <div class="modalCenterdemo">
       <div class="demoModalButtons">
         <button @click="demoButtonClicked" class="saveLocationButton">
@@ -97,12 +100,13 @@ console.log(props.shopFlag);
   border-radius: 3px;
 }
 
-.modalBody {
+.modalBodydemo {
   z-index: 100000 !important;
   width: 100%;
   height: 100%;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.8);
+  /* background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.8); */
+  /* background: none; */
   position: fixed;
   display: flex;
   justify-content: center;

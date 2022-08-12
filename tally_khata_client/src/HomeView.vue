@@ -71,7 +71,7 @@ const signOutStart = () => {
 const createAShopClicked = () => {
   createAShopFlag.value = true;
   console.log("ahm ahm");
-  this.getShopsOfUser();
+  // this.getShopsOfUser();
 };
 
 const modalResponse = () => {
@@ -112,7 +112,12 @@ const updateLocation = (val) => {
   lng.value = val.latLng.lng();
 }
 
-
+const openLocationModal = (val) => {
+  console.log('Hello World')
+  locationAddFlag.value=true;
+  lat.value=val.lattitude;
+  lng.value = val.longitude;
+}
 </script>
 <template>
   <div>
@@ -124,7 +129,7 @@ const updateLocation = (val) => {
       @response="modalResponse"
       @locationResponse="locationAddButtonClicked"
     />
-    <DemoModal v-if = "locationAddFlag"  :demoFlag= "locationAddFlag" @responseLocation="locationModalClose" @locationInfo="updateLocation"/>
+    <DemoModal v-if = "locationAddFlag"  :demoFlag= "locationAddFlag" :lattitude="lat.value"  :longitude="lng.value" @responseLocation="locationModalClose" @locationInfo="updateLocation"/>
     <!-- <ShopLocationPicker
     ></ShopLocationPicker> -->
     <div class="homeViewNav">
@@ -206,14 +211,18 @@ const updateLocation = (val) => {
     <div class="homeViewBody">
       <div class="homeViewBodyNavMargin"></div>
 
-      <div class="homeViewBodyMain">g"
+      <div class="homeViewBodyMain">
         <!-- <ShopView v-if="shopOpenFla/> -->
         <ShopCard
           @responseMaximize="shopOpenView(items)"
+          @locationViewed="openLocationModal"
           v-for="items in shops"
+          :lattitude="items.lattitude"
+          :longitude="items.longitude"
           :shopName="items.shop_name"
           :shopOwner="items.owner_name"
           :shopDescription="items.description"
+          :shopEmail = "items.email"
         />
       </div>
     </div>
@@ -241,13 +250,13 @@ export default {
     var vm = this;
     this.getShopsOfUser();
     this.userInfo = localStorageService.getUserInfo();
-    toast.success("Logged In Successfully");
+    // toast.success("Logged In Successfully");
   },
   mounted() {},
   methods: {
     modalResponse(){
       this.createAShopFlag = false;
-      toast.success("Add shop for owner successfully");
+      // toast.success("Add shop for owner successfully");
       this.getShopsOfUser();
     },
     toggleNerby() {
@@ -268,34 +277,116 @@ export default {
                 owner_name: "Abdur Rahman",
                 owner_number: "01234566754",
                 shop_name: "GrameenPhone",
+                email: "gpakhaliabd@gmail.com" ,
+                description: "Grameenphone, widely abbreviated as GP, is the leading telecommunications service provider in Bangladesh, with 83.02 million subscribers. It is a joint venture between Telenor and Grameen Telecom Corporation.",
               },
               {
                 lattitude: 25.66,
                 longitude: 24.33,
-                owner_name: "Abdur Rahman",
-                owner_number: "01234566754",
-                shop_name: "GrameenPhone",
+                owner_name: "Kim Ki-Nam",
+                owner_number: "013423243443",
+                shop_name: "Samsung",
+                email: "samsungakhaliabd@gmail.com" ,
+                description: "Samsung helps you discover a wide range of home electronics with cutting-edge technology including smartphones, tablets, TVs, home appliances and more.",
               },
               {
                 lattitude: 25.66,
                 longitude: 24.33,
-                owner_name: "Abdur Rahman",
-                owner_number: "01234566754",
-                shop_name: "GrameenPhone",
+                owner_name: "Manish Grover",
+                owner_number: "01834545454",
+                shop_name: "Tasty Treat",
+                email: "tastytreatbd@gmail.com" ,
+                description: "Delicious meals delivered fresh to your doorstep. Browse our menu and order online! What are you hungry for today",
               },
               {
                 lattitude: 25.66,
                 longitude: 24.33,
-                owner_name: "Abdur Rahman",
+                owner_name: "Erik Aas",
                 owner_number: "01234566754",
-                shop_name: "GrameenPhone",
+                shop_name: "Banglalink",
+                email: "blinkakhaliabd@gmail.com" ,
+                description: "Banglalink Digital Communications Ltd. is a telecommunication service provider in Bangladesh. It's the third-largest cellular service provider in Bangladesh.",
               },
               {
                 lattitude: 25.66,
                 longitude: 24.33,
-                owner_name: "Abdur Rahman",
+                owner_name: "Paul Seed",
+                owner_number: "01634566754",
+                shop_name: "StarTech",
+                email: "starTechbd@gmail.com" ,
+                description: "StarTech.com is an technology manufacturer, specializing in hard-to-find connectivity parts, primarily used in the information technology and professional A/V industries. StarTech.com services a worldwide market with operations throughout the United States, Canada, Europe, Latin America and Taiwan.",
+              },
+              {
+                lattitude: 25.66,
+                longitude: 24.33,
+                owner_name: "Kim Ki-Nam",
+                owner_number: "013423243443",
+                shop_name: "Samsung",
+                email: "samsungakhaliabd@gmail.com" ,
+                description: "Samsung helps you discover a wide range of home electronics with cutting-edge technology including smartphones, tablets, TVs, home appliances and more.",
+              },
+              {
+                lattitude: 25.66,
+                longitude: 24.33,
+                owner_name: "Manish Grover",
+                owner_number: "01834545454",
+                shop_name: "Tasty Treat",
+                email: "lasttasteakhaliabd@gmail.com" ,
+                description: "Delicious meals delivered fresh to your doorstep. Browse our menu and order online! What are you hungry for today",
+              },
+              {
+                lattitude: 25.66,
+                longitude: 24.33,
+                owner_name: "Erik Aas",
                 owner_number: "01234566754",
-                shop_name: "GrameenPhone",
+                shop_name: "Banglalink",
+                email: "akhaliablinkbd@gmail.com" ,
+                description: "Banglalink Digital Communications Ltd. is a telecommunication service provider in Bangladesh. It's the third-largest cellular service provider in Bangladesh.",
+              },
+              {
+                lattitude: 25.66,
+                longitude: 24.33,
+                owner_name: "Paul Seed",
+                owner_number: "01634566754",
+                shop_name: "StarTech",
+                email: "sTakhaliabd@gmail.com" ,
+                description: "StarTech.com is an technology manufacturer, specializing in hard-to-find connectivity parts, primarily used in the information technology and professional A/V industries. StarTech.com services a worldwide market with operations throughout the United States, Canada, Europe, Latin America and Taiwan.",
+              },
+              {
+                lattitude: 25.66,
+                longitude: 24.33,
+                owner_name: "Kim Ki-Nam",
+                owner_number: "013423243443",
+                shop_name: "Samsung",
+                email: "akhaliasambd@gmail.com" ,
+                description: "Samsung helps you discover a wide range of home electronics with cutting-edge technology including smartphones, tablets, TVs, home appliances and more.",
+              },
+              {
+                lattitude: 25.66,
+                longitude: 24.33,
+                owner_name: "Manish Grover",
+                owner_number: "01834545454",
+                shop_name: "Tasty Treat",
+                email: "ttsylhetbd@gmail.com" ,
+                description: "Delicious meals delivered fresh to your doorstep. Browse our menu and order online! What are you hungry for today",
+              },
+              {
+                lattitude: 25.66,
+                longitude: 24.33,
+                owner_name: "Erik Aas",
+                owner_number: "01234566754",
+                shop_name: "Banglalink",
+                email: "blinkbd@gmail.com" ,
+                description: "Banglalink Digital Communications Ltd. is a telecommunication service provider in Bangladesh. It's the third-largest cellular service provider in Bangladesh.",
+              },
+              {
+                lattitude: 25.66,
+                longitude: 24.33,
+                owner_name: "Paul Seed",
+                owner_number: "01634566754",
+                shop_name: "StarTech",
+                email: "stechbd@gmail.com" ,
+                description: "StarTech.com is an technology manufacturer, specializing in hard-to-find connectivity parts, primarily used in the information technology and professional A/V industries. StarTech.com services a worldwide market with operations throughout the United States, Canada, Europe, Latin America and Taiwan.",
               },
             ];
           } else {

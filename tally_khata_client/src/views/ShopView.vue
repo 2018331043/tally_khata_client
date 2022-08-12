@@ -21,11 +21,12 @@ const AddLoanClicked = () => {
   addLoanClickedFlag.value = true;
 };
 
-const debtModalClose = () => {
-  addLoanClickedFlag.value = false;
-  getShopInfo();
+// const debtModalClose = () => {
+//   addLoanClickedFlag.value = false;
+//   this.getShopInfo();
 
-};
+
+// };
 
 //demo modal functionality
 // const demoModalFlag = ref(false)
@@ -63,8 +64,8 @@ const debtModalClose = () => {
     <div class="shopViewBody">
       <div class="shopViewSidebar">
         <div class="shopViewSidebarItems">
-          <p>Active Loans</p>
-          <p @click="AddLoanClicked">Add Loan</p>
+          <p>Debts to Collect</p>
+          <p @click="AddLoanClicked">Add Debt</p>
         </div>
       </div>
       <div class="shopViewDebtList">
@@ -121,7 +122,13 @@ export default {
     console.log(this.shopNumber);
   },
   methods:{
+    debtModalClose() {
+      this.addLoanClickedFlag = false;
+      this.getShopInfo();
+
+    },
     getShopInfo() {
+      console.log('asdasd')
       shopService.getShopInfo((data)=>{
         toast.success('Loaded the shop info successfully');
         this.shopInfo = data.shopDetails;

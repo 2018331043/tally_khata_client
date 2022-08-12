@@ -20,14 +20,23 @@ import { defineComponent, defineProps, defineEmits, ref } from "vue";
 import { GoogleMap, Marker, CustomControl } from "vue3-google-map";
 const props = defineProps({
   saveLocation: Function,
+  lattitude:Number,
+  longitude:Number,
 });
 const emit = defineEmits(["locationChanged"]);
 const center = ref({ lat: 24.907177, lng: 91.835413 });
 getLocation();
 function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(setPosition);
+  if(props.lattitude==null){
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(setPosition);
+    }
+  }else{
+    console.log(props.lattitude);
+    center.value.lat = props.lattitude;
+    center.value.lng = props.longitude;
   }
+  
 }
 function setPosition(position) {
   center.value.lat = position.coords.latitude;

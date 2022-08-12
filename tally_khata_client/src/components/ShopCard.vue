@@ -3,15 +3,28 @@ const props = defineProps({
   shopName: String,
   shopOwner: String,
   shopDescription: String,
+  shopEmail: String,
+  lattitude:Number,
+  longitude:Number,
 });
 
-const emit = defineEmits(["responseMaximize"]);
+const emit = defineEmits(["responseMaximize","locationViewed"]);
 
 const maximizeTab = () => {
   emit("responseMaximize");
 }
-console.log(props);
-console.log("wow");
+
+const locationCLicked = ()=>{
+  emit('locationViewed',{
+    lattitude:props.lattitude,
+    longitude:props.longitude
+  })
+}
+
+let email ="mailto:" + props.shopEmail + "?subject=Product Order";
+console.log(email);
+// console.log(props.shopEmail);
+// console.log("wow");
 </script>
 
 <template props>
@@ -27,7 +40,7 @@ console.log("wow");
         {{props.shopDescription}}
       </p>
       <div class="shopCardButtonContainer">
-        <div class="shopCardButton">
+        <div class="shopCardButton" @click="locationCLicked">
           <img
             alt="location"
             src="@/icons/placeholder.png"
@@ -41,9 +54,8 @@ console.log("wow");
             alt="location"
             src="@/icons/received.png"
             width="15px"
-            height="15px"
-          />
-          <a href="mailto:ahmediftekher@gmail.com" class="card-link">Place an Order</a>
+            height="15px"/>
+          <a :href="'mailto:' + props.shopEmail + '?subject=Product Order'" class="card-link">Place an Order</a>
         </div>
       </div>
     </div>
@@ -84,6 +96,8 @@ console.log("wow");
 
 .shopCardButton img {
   margin-right: 8px;
+  height: 20px;
+  width: 20px;
 }
 .shopCardDescription {
   height: 90px;
