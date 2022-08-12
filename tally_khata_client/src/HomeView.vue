@@ -90,9 +90,10 @@ const pageTitleContainer = ref("Nearby Shops");
 
 const shopOpenFlag = ref(false);
 
-const shopOpenView = (e) => {
+const shopOpenView = (items) => {
+  console.log(items);
   shopOpenFlag.value = true;
-  router.push({ name: "shop", params: { title: "This is the title" } });
+  router.push({ name: "shop", params: { shopNumber: items.shop_number } });
 };
 
 //demoModalImplementation
