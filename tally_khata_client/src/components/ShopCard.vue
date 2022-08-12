@@ -4,6 +4,12 @@ const props = defineProps({
   shopOwner: String,
   shopDescription: String,
 });
+
+const emit = defineEmits(["responseMaximize"]);
+
+const maximizeTab = () => {
+  emit("responseMaximize");
+}
 console.log(props);
 console.log("wow");
 </script>
@@ -13,6 +19,9 @@ console.log("wow");
     <div class="card-body">
       <h5 class="card-title">{{props.shopName}}</h5>
       <h6 class="card-subtitle mb-2 text-muted">Owner : {{props.shopOwner}}</h6>
+      <div class="maximizeShop">
+        <img @click="maximizeTab" src="../icons/maximize.png" alt="maximize"/>
+      </div>
       <div class="shopCardLine"></div>
       <p :style="{ fontSize: '12px' }" class="card-text shopCardDescription">
         {{props.shopDescription}}
@@ -34,7 +43,7 @@ console.log("wow");
             width="15px"
             height="15px"
           />
-          <a href="#" class="card-link">Place an Order</a>
+          <a href="mailto:ahmediftekher@gmail.com" class="card-link">Place an Order</a>
         </div>
       </div>
     </div>
@@ -42,6 +51,25 @@ console.log("wow");
 </template>
 
 <style>
+
+.maximizeShop img:hover{
+  width: 30px;
+  height: 30px;
+  /* padding: 5px; */
+}
+.maximizeShop img{
+  width: 25px;
+  height: 25px;
+}
+
+.maximizeShop{
+  top: 25px;
+  right: 20px;
+  position: absolute;
+  /* background: yellow; */
+  /* width: 25px; */
+  /* height: 25px; */
+}
 .shopCardButton {
   display: flex;
   align-items: center;
