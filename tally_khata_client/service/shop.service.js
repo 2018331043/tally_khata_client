@@ -17,6 +17,22 @@ const shopService = {
             })
             .catch((errorResponse) => error(errorResponse));
     },
+    getShopInfo(success, error, data) {
+        axios
+            .post('/get-shop-details',data)
+            .then((responseData) => {
+                success(responseData.data);
+            })
+            .catch((errorResponse) => error(errorResponse));
+    },
+    addDebtForShop(success, error, data) {
+        axios
+            .post('/save-debt-for-customer',data)
+            .then((responseData) => {
+                success(responseData.data);
+            })
+            .catch((errorResponse) => error(errorResponse));
+    },
 };
 
 export default shopService;

@@ -31,7 +31,7 @@ const router = createRouter({
       component: SignInView
     },
     {
-      path: "/shop/:title",
+      path: "/shop/:shopNumber",
       name: "shop",
       component: ShopView,
       props: true,

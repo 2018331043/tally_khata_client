@@ -1,9 +1,11 @@
 <script setup>
 import { ref } from "vue";
-
+import shopService from "../../service/shop.service";
+import toast from "../../service/toast.service";
 import "bootstrap";
 const props = defineProps({
   debtFlag: Boolean,
+  shopNumber:String
 });
 
 const debtorData = ref({
@@ -17,6 +19,17 @@ const emit = defineEmits(["responseDebt"]);
 
 const addDebt = () => {
   console.log(debtorData.value);
+  shopService.addDebtForShop((data)=>{
+    toast.success('Added Debt for the customer successfully')
+  },(err)=>{
+
+  },{
+    customer_phone_number:debtorData.value.number,
+    shop_number:props.shopNumber,
+    description:debtorData.value.remarks,
+    amount:debtorData.value.amount,
+    customer_name:debtorData.value.name,
+  })
   emit("responseDebt", false);
 };
 console.log(props.shopFlag);
